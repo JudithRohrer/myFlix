@@ -1,21 +1,171 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Movie API - Documentation</title>
-  <link rel="shortcut icon" href="img/favicon-96x96.ico">
-  <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="#">
-</head>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Movie API - Documentation</title>
+    <link rel="shortcut icon" href="img/favicon-96x96.ico"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="#"/>
+  </head>
 
-<body>
-  <h1>Movie API -Documentation</h1>
-  <p>To build the server­side component of a “movies” web application, <br>
-    this API provides a database that stores data about different movies,<br>
-    providing users access to information about their different directors and genres.
-  </p>
-</body>
+  <body>
+    <h1>Movie API -Documentation</h1>
+    <p>To build the server­side component of a “movies” web application, this API provides a database that stores data about different movies,<br>
+      providing users access to information about their different directors and genres.
+    </p>
+    <p> The table below describes the endpoints of this API and which Information will be send back and forward:</p>
 
+    <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Description</th>
+      <th scope="col">URL</th>
+      <th scope="col">HTTP method</th>
+      <th scope="col">Request body data format</th>
+      <th scope="col">Response body data format</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Get a list of all movies</th>
+      <td>/movies</td>
+      <td>GET</td>
+      <td>none</td>
+      <td>JSON object holding data of all movies from list.</td>
+    </tr>
+    <tr>
+      <th scope="row">Get information about a certain movie</th>
+      <td>/movies/[title]</td>
+      <td>GET</td>
+      <td>none</td>
+      <td>JSON object holding data of requested film-title. Example:<br>
+          {<br>
+          &ensp;title: "Casablanca",<br>
+          &ensp;description: "World War II-era movie, etc",<br>
+          &ensp;genre: {<br>
+          &emsp;&emsp;name:"Drama",<br>
+          &emsp;&emsp;description: "Movie with serious undertones, etc.“<br>
+          &emsp;&emsp;},<br>
+          director: {<br>
+          &emsp;&emsp;name: "Michael Curtiz",<br>
+          &emsp;&emsp;bio: "Hungarian-born American Director, etc.",<br>
+          &emsp;&emsp;birth: "1886",<br>
+          &emsp;&emsp;death: "1962“<br>
+          &emsp;&emsp;},<br>
+          imagePath: "casablanca.png",<br>
+          featured: false <br>
+          }
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Get information about a certain genre</th>
+      <td>/movies/genre/[name]</td>
+      <td>GET</td>
+      <td>none</td>
+      <td>JSON object holding data of requested film-genre. Example:<br>
+        {<br>
+        name:"Drama",<br>
+        description: "Movie with serious undertones, etc.“<br>
+        }<br>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Get information about a certain director</th>
+      <td>/movies/director/[name]</td>
+      <td>GET</td>
+      <td>none</td>
+      <td>JSON object holding data of requested director. Example:<br>
+        {<br>
+        name: "Michael Curtiz",<br>
+        bio: "Hungarian-born American Director, etc.",<br>
+        birth: "1886",<br>
+        death: "1962“<br>
+        }<br>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Add a new user to the registry</th>
+      <td>/users</td>
+      <td>POST</td>
+      <td>JSON object holding data of the user to add:<br>
+        {<br>
+          &ensp;username: “myName”,<br>
+          &ensp;password: ”myPassword”,<br>
+          &ensp;email:”mail@gmail.com”,<br>
+          &ensp;date of birth: “29-09-1985”<br>
+        }
+      </td>
+      <td>JSON object holding data of the user added to registry<br> including newly allocated user-id. Example:<br>
+        {<br>
+        id: 5,<br>
+        username:”myName”,<br>
+        password:”myPassword”,<br>
+        email:”mail@gmail.com”,<br>
+        date of birth:”29-09-1985”<br>
+        }
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Update ones user information</th>
+      <td>/users/[username]/profile</td>
+      <td>PUT</td>
+      <td>JSON object holding data of the user to add:<br>
+        {<br>
+          &ensp;username: “newName”,<br>
+          &ensp;password: ”newPassword”,<br>
+          &ensp;email:”new@gmail.com”,<br>
+          &ensp;date of birth: “29-09-90”<br>
+        }
+      </td>
+      <td>A text message indicating user information that was updated to profile.</td>
+    </tr>
+    <tr>
+      <th scope="row">Add new movie to the users favorite-list</th>
+      <td>/users/[username]/favorites</td>
+      <td>POST</td>
+      <td>none</td>
+      <td>Text message indicating that movie has been added to favorite-list.</td>
+    </tr>
+    <tr>
+      <th scope="row">Delete a movie from the users favorite-list</th>
+      <td>/users/[username]/favorites/[title]</td>
+      <td>DELETE</td>
+      <td>none</td>
+      <td>Text message that movie has successfully removed from favorite-list.</td>
+    </tr>
+    <tr>
+      <th scope="row">Remove a user from the the registry</th>
+      <td>/users/[username]</td>
+      <td>DELETE</td>
+      <td>none</td>
+      <td>Text message whether user has successfully been removed.</td>
+    </tr>
+  </tbody>
+</table>
+  </tbody>
+</table>
+
+
+
+
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

@@ -1,7 +1,11 @@
 const express = require('express'),
-morgan = require('morgan');
+  bodyParser = require('body-parser'),
+  uuid = require('uuid'),
+  morgan = require('morgan');
 
 const app = express();
+
+app.use(bodyParser.json());
 
 let topFilms = [
   {
@@ -48,14 +52,57 @@ let topFilms = [
 
 app.use(morgan('common'));
 
-// GET requests
+app.get('/', (req, res) => {
+  res.send('Welcome to myFlix - The incredible movie app!');
+});
+
+// GET the list of all movies
 app.get('/movies', (req, res) => {
   res.json(topFilms);
 });
 
-app.get('/', (req, res) => {
-  res.send('Welcome to myFlix - The incredible movie app!');
+//GET data about a certain movie by title
+app.get('/movies/:title', (req, res) =>{
+  res.send('Sucessful GET request returning data of a single movie by title');
 });
+
+//GET data about a certain genre
+app.get('/movies/genre/:name', (req, res) => {
+  res.send('Sucessful GET request returning data of a certain genre');
+});
+
+//GET data about a certain director
+app.get('/movies/director/:name', (req, res) => {
+  res.send('Sucessful GET request returning data of a certain director');
+});
+
+//POST a new user to the registry
+app.post('/users', (req, res) => {
+  res.send('Sucessful POST request to add a new user to registry');
+});
+
+//Update users information
+app.put('/users/:username/profile', (req, res) => {
+  res.send('Sucessful PUT request to update user information');
+});
+
+//POST a new movie to users favorite-listening
+app.post('/users/:username/favorites', (req, res) => {
+  res.send('Sucessful POST request to add a movie to users favorite-list');
+});
+
+//DELETE a movie from users favorite-listen
+app.delete('/users/:username/favorites/:title', (req, res) => {
+  res.send('Sucessful DELETE request to remove a movie from users favorite-list');
+});
+
+//DELETE a user from registry
+app.delete('/users/:username', (req, res) => {
+  res.send('Sucessful DELETE request to remove a user from registry');
+});
+
+
+
 
 app.use(express.static('public'));
 
