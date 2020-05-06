@@ -67,12 +67,12 @@ app.get('/movies/:title', (req, res) =>{
 });
 
 //GET data about a certain genre
-app.get('/movies/genre/:name', (req, res) => {
+app.get('/genres/:name', (req, res) => {
   res.send('Sucessful GET request returning data of a certain genre');
 });
 
 //GET data about a certain director
-app.get('/movies/director/:name', (req, res) => {
+app.get('/directors/:name', (req, res) => {
   res.send('Sucessful GET request returning data of a certain director');
 });
 
