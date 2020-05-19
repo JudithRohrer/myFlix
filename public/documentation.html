@@ -43,19 +43,20 @@
           <td>none</td>
           <td>JSON object holding data of requested film-title. Example:<br>
               {<br>
-              &ensp;title: "Casablanca",<br>
-              &ensp;description: "World War II-era movie, etc",<br>
               &ensp;genre: {<br>
               &emsp;&emsp;name:"Drama",<br>
               &emsp;&emsp;description: "Movie with serious undertones, etc.“<br>
               &emsp;&emsp;},<br>
-              director: {<br>
+              &ensp;director: {<br>
               &emsp;&emsp;name: "Michael Curtiz",<br>
               &emsp;&emsp;bio: "Hungarian-born American Director, etc.",<br>
               &emsp;&emsp;birth: "1886",<br>
               &emsp;&emsp;},<br>
-              imagePath: "casablanca.png",<br>
-              featured: false <br>
+              &ensp;_id: "30950hf8fju8544",<br>
+              &ensp;title: "Casablanca",<br>
+              &ensp;description: "World War II-era movie, etc",<br>
+              &ensp;imagePath: "casablanca.png",<br>
+              &ensp;featured: false <br>
               }
           </td>
         </tr>
@@ -92,47 +93,81 @@
             {<br>
               &ensp;username: “myName”,<br>
               &ensp;password: ”myPassword”,<br>
-              &ensp;email:”mail@gmail.com”,<br>
+              &ensp;email: ”mail@gmail.com”,<br>
               &ensp;birthday: “1985-09-30”<br>
             }
           </td>
           <td>JSON object holding data of the user added to registry<br> including newly allocated user-id. Example:<br>
             {<br>
-            id: 5,<br>
-            username:”myName”,<br>
-            password:”myPassword”,<br>
-            email:”mail@gmail.com”,<br>
-            birthday:”1985-09-30”<br>
+            favorites:[""]<br>
+            _id: "5",<br>
+            username: ”myName”,<br>
+            password: ”myPassword”,<br>
+            email: ”mail@gmail.com”,<br>
+            birthday: ”1985-09-30T00:00:00.00Z”<br>
+            __v: 0
             }
           </td>
         </tr>
         <tr>
           <th scope="row">Update ones user information</th>
-          <td>/users/[username]/profile</td>
+          <td>/users/[username]</td>
           <td>PUT</td>
           <td>JSON object holding data of the user to add:<br>
             {<br>
               &ensp;username: “newName”,<br>
               &ensp;password: ”newPassword”,<br>
-              &ensp;email:”new@gmail.com”,<br>
+              &ensp;email: ”new@gmail.com”,<br>
               &ensp;birthday: “1985-09-30”<br>
             }
           </td>
-          <td>A text message indicating user information that was updated to profile.</td>
+          <td>JSON object holding data of the user<br> including updated information of the user. Example:<br>
+            {<br>
+            favorites:[""]<br>
+            _id: "5",<br>
+            username: ”NewName”,<br>
+            password: ”NewPassword”,<br>
+            email: ”NewMail@gmail.com”,<br>
+            birthday: ”1985-09-30T00:00:00.00Z”
+            }
+          </td>
         </tr>
         <tr>
           <th scope="row">Add new movie to the users favorite-list</th>
-          <td>/users/[username]/favorites</td>
+          <td>/users/[username]/favorites/[MovieID]</td>
           <td>POST</td>
           <td>none</td>
-          <td>Text message indicating that movie has been added to favorite-list.</td>
+          <td>JSON object holding data of the user<br> including updated favorites-list. Example:<br>
+            {<br>
+            favorites:[<br>
+            "456899",<br>
+            "8857690"<br>
+            ],<br>
+            _id: "5",<br>
+            username: ”NewName”,<br>
+            password: ”NewPassword”,<br>
+            email: ”NewMail@gmail.com”,<br>
+            birthday: ”1985-09-30T00:00:00.00Z”
+            }
+          </td>
         </tr>
         <tr>
           <th scope="row">Delete a movie from the users favorite-list</th>
-          <td>/users/[username]/favorites/[title]</td>
+          <td>/users/[username]/favorites/[MovieID]</td>
           <td>DELETE</td>
           <td>none</td>
-          <td>Text message that movie has successfully removed from favorite-list.</td>
+          <td>JSON object holding data of the user<br> including updated favorites-list. Example:<br>
+            {<br>
+            favorites:[<br>
+            "8859947",<br>
+            ],<br>
+            _id: "5",<br>
+            username: ”Hans”,<br>
+            password: ”Password123”,<br>
+            email: ”mail@gmail.com”,<br>
+            birthday: ”1989-09-30T00:00:00.00Z”
+            }
+          </td>
         </tr>
         <tr>
           <th scope="row">Remove a user from the the registry</th>

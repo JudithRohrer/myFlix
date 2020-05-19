@@ -9,7 +9,8 @@ let movieSchema = mongoose.Schema({
   },
   director: {
     name: String,
-    bio: String
+    bio: String,
+    birth: String
   },
   imagePath: String,
   featured: Boolean
@@ -23,8 +24,8 @@ let userSchema = mongoose.Schema({
   favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movie'}]
 });
 
-let Movie = mongoose.model('Movie', movieSchema);
-let User = mongoose.model('User', userSchema);
+let Movie = mongoose.model('Movie', movieSchema, 'movies');
+let User = mongoose.model('User', userSchema, 'users');
 
 module.exports.Movie = Movie;
 module.exports.User = User;
