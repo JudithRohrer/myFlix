@@ -26,15 +26,39 @@
           <th scope="col">HTTP method</th>
           <th scope="col">Request body data format</th>
           <th scope="col">Response body data format</th>
+          <th scope="col">Authentication Strategy</th>
         </tr>
       </thead>
       <tbody>
+        <tr>
+          <th scope="row">Login as a user</th>
+          <td>/login</td>
+          <td>POST</td>
+          <td>JSON holding data of username and password</td>
+          <td>JSON object holding data of the logged in user and its generated Token:<br>
+            {<br>
+              &ensp;user: {<br>
+                &emsp;favorites: [],<br>
+                &emsp;_id: "5",<br>
+                &emsp;username: “myName”,<br>
+                &emsp;password: ”myPassword”,<br>
+                &emsp;email: ”mail@gmail.com”,<br>
+                &emsp;birthday: “1985-09-30”<br>
+                &emsp;__v: 0<br>
+            },<br>
+              &ensp;token:<br>
+              &emsp;"998790griuoZOkjhu98787jhkuHkdkjgPPJUDKDdhkssdh895874"<br>
+            }
+          </td>
+          <td>Local Strategy</td>
+        </tr>
         <tr>
           <th scope="row">Get a list of all movies</th>
           <td>/movies</td>
           <td>GET</td>
           <td>none</td>
           <td>Returns an array of movie objects.</td>
+          <td>JWT Strategy</td>
         </tr>
         <tr>
           <th scope="row">Get information about a certain movie</th>
@@ -59,6 +83,7 @@
               &ensp;featured: false <br>
               }
           </td>
+          <td>JWT Strategy</td>
         </tr>
         <tr>
           <th scope="row">Get information about a certain genre</th>
@@ -71,6 +96,7 @@
             description: "Movie with serious undertones, etc.“<br>
             }<br>
           </td>
+          <td>JWT Strategy</td>
         </tr>
         <tr>
           <th scope="row">Get information about a certain director</th>
@@ -84,6 +110,7 @@
             birth: "1886",<br>
             }<br>
           </td>
+          <td>JWT Strategy</td>
         </tr>
         <tr>
           <th scope="row">Add a new user to the registry</th>
@@ -108,6 +135,7 @@
             __v: 0
             }
           </td>
+          <td>none</td>
         </tr>
         <tr>
           <th scope="row">Update ones user information</th>
@@ -131,6 +159,7 @@
             birthday: ”1985-09-30T00:00:00.00Z”
             }
           </td>
+          <td>JWT Strategy</td>
         </tr>
         <tr>
           <th scope="row">Add new movie to the users favorite-list</th>
@@ -150,6 +179,7 @@
             birthday: ”1985-09-30T00:00:00.00Z”
             }
           </td>
+          <td>JWT Strategy</td>
         </tr>
         <tr>
           <th scope="row">Delete a movie from the users favorite-list</th>
@@ -168,6 +198,7 @@
             birthday: ”1989-09-30T00:00:00.00Z”
             }
           </td>
+          <td>JWT Strategy</td>
         </tr>
         <tr>
           <th scope="row">Remove a user from the the registry</th>
@@ -175,6 +206,7 @@
           <td>DELETE</td>
           <td>none</td>
           <td>Text message whether user has successfully been removed.</td>
+          <td>JWT Strategy</td>
         </tr>
       </tbody>
     </table>
