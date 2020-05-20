@@ -34,7 +34,12 @@
           <th scope="row">Login as a user</th>
           <td>/login</td>
           <td>POST</td>
-          <td>JSON holding data of username and password</td>
+          <td>JSON holding data of username and password:<br>
+          {<br>
+            &ensp;username: "User345",<br>
+            &ensp;password: "Password123"<br>
+          }
+        </td>
           <td>JSON object holding data of the logged in user and its generated Token:<br>
             {<br>
               &ensp;user: {<br>
