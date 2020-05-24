@@ -14,7 +14,7 @@ app.use(morgan('common'));
 app.use(express.static('public'));
 
 //give certain origins access
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+let allowedOrigins = ['http://localhost:8080', '*'];
 
 app.use(cors({
   origin: (origin, callback) => {
