@@ -1,21 +1,42 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import axios from 'axios';
 
-import './index.scss';
+export class MainView extends React.Component {
+  constructor() {
+    super();
 
-// Main component
-class MyFlixApplication extends React.Component {
+    this.state = {};
+  }
   render() {
     return (
-      <div className="my-flix">
-        <div>Good morning</div>
+      <div className="main-view"></div>
+    );
+    }
+  
+
+  componentDidMount() {
+    axios.get('https://myflix-123-db.herokuapp.com/movies')
+      .then(response => {
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  render() {
+    const { movies } = this.state;
+
+    if (!movies) return <div className="main-view"/>;
+
+    return (
+      <div className="main-view">
+      { movies.map(movie => (
+        <div className="movie-card" key={movie._id}>{movie.title}</div> 
+      ))}
       </div>
     );
   }
 }
-
-// Finds the root to app
-const container = document.getElementsByClassName('app-container')[0];
-
-//Tells React to render app in the root DOM element
-ReactDOM.render(React.createElement(MyFlixApplication), container);
