@@ -1,18 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 
+import { MovieCard } from '../movie-card/movie-card';
+import { MovieView } from '../movie-view/movie-view';
+
 export class MainView extends React.Component {
   constructor() {
     super();
 
-    this.state = {};
+    this.state = {
+      movies: null,
+      selectedMovie: null
+    };
   }
-  render() {
-    return (
-      <div className="main-view"></div>
-    );
-    }
-  
 
   componentDidMount() {
     axios.get('https://myflix-123-db.herokuapp.com/movies')
@@ -26,16 +26,32 @@ export class MainView extends React.Component {
       });
   }
 
-  render() {
-    const { movies } = this.state;
+  onMovieClick(movie) {
+    this.setState({
+      selectedMovie: movie
+    });
+  }
 
+  onResetSelectedMovie() { 
+    this.setState({ 
+    selectedMovie: null, 
+    });
+    }
+
+  render() {
+    const { movies, selectedMovie } = this.state;
+    // before the movies have been loaded
     if (!movies) return <div className="main-view"/>;
 
     return (
       <div className="main-view">
-      { movies.map(movie => (
-        <div className="movie-card" key={movie._id}>{movie.title}</div> 
-      ))}
+      {selectedMovie
+        ? <MovieView movie={selectedMovie}
+          onResetSelectedMovie={() => this.onResetSelectedMovie()}/> 
+        : movies.map(movie => (
+        <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/> 
+      ))
+      }
       </div>
     );
   }
