@@ -1,4 +1,7 @@
 import React from 'react';
+
+// import './movie-view.scss';
+
 import { MainView } from '../main-view/main-view';
 
 export class MovieView extends React.Component {
@@ -25,7 +28,7 @@ export class MovieView extends React.Component {
           <span className="label">Description: </span>
           <span className="value">{movie.description}</span>
         </div>
-        
+
         <div className="movie-genre">
           <span className="label">Genre: </span>
           <span className="value">{movie.genre.name}</span>

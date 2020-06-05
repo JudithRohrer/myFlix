@@ -1,1 +1,1 @@
-{"version":3,"sources":["index.scss"],"names":[],"mappings":"AAEA;EACE,OAHM","file":"src.78399e21.css","sourceRoot":"../src","sourcesContent":["$color: pink;\n\n.my-flix {\n  color: $color;\n}\n"]}
+{"version":3,"sources":["components/login-view/login-view.scss"],"names":[],"mappings":"AAAA;EACE;EACA;EACA;EACA;EACA","file":"src.78399e21.css","sourceRoot":"../src","sourcesContent":[".loginContainer {\n  width: 300px;\n  margin-top: 200px;\n  background-color: lightgrey;\n  padding: 20px;\n  box-shadow: 10px 10px 40px grey\n}\n"]}
