@@ -1,9 +1,21 @@
 .loginContainer {
-  width: 300px;
+  width: 350px;
   margin-top: 200px;
   background-color: lightgrey;
   padding: 20px;
   box-shadow: 10px 10px 40px grey;
+}
+.cardBody {
+  box-shadow: 10px 10px 40px grey;
+  margin-top: 20px;
+}
+
+.cardImage {
+  height: 400px;
+}
+.FormMovie {
+  box-shadow: 10px 10px 40px grey;
+  margin: 0 auto;
 }
 
 /*# sourceMappingURL=/src.78399e21.css.map */

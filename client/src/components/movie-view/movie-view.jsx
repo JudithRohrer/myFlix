@@ -1,6 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
-// import './movie-view.scss';
+import './movie-view.scss';
 
 import { MainView } from '../main-view/main-view';
 
@@ -18,27 +21,37 @@ export class MovieView extends React.Component {
     if (!movie) return null;
 
     return (
-      <div className="movie-view">
-        <img className="movie-poster" src={movie.imagePath} />
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value">{movie.title}</span>
-        </div>
-        <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.description}</span>
-        </div>
-
-        <div className="movie-genre">
-          <span className="label">Genre: </span>
-          <span className="value">{movie.genre.name}</span>
-        </div>
-        <div className="movie-director">
-          <span className="label">Director: </span>
-          <span className="value">{movie.director.name}</span>
-        </div>
-        <button className="reset-button" onClick={() => this.props.onResetSelectedMovie()}>Back</button>
+      <div className="FormMovie">
+        <Card style={{ width: '28rem' }}>
+          <Card.Img variant="top" src={movie.imagePath} />
+          <Card.Body>
+            <Card.Title>{movie.title}</Card.Title>
+            <Card.Text>Description: {movie.description}</Card.Text>
+            <Card.Text>Genre: {movie.genre.name}</Card.Text>
+            <Card.Text>Director: {movie.director.name}</Card.Text>
+            <Button variant="light" onClick={() => this.props.onResetSelectedMovie()}>Back</Button>
+          </Card.Body>
+        </Card>
       </div>
     );
   }
 }
+
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    genre: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired
+    }),
+    director: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      bio: PropTypes.string.isRequired,
+      birth: PropTypes.string.isRequired
+    }),
+    imagePath: PropTypes.string.isRequired,
+    featured: PropTypes.bool.isRequired
+  }).isRequired,
+  onResetSelectedMovie: PropTypes.func.isRequired
+};

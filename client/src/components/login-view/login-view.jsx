@@ -4,6 +4,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
+import { RegistrationView } from '../registration-view/registration-view';
+
+
 import './login-view.scss';
 
 export function LoginView(props) {
@@ -39,6 +42,7 @@ export function LoginView(props) {
             onChange={e => setPassword(e.target.value)}
           />
         </Form.Group>
+
         <Button
           className="button-main"
           variant="dark"
@@ -46,13 +50,20 @@ export function LoginView(props) {
           onClick={handleSubmit}
         >Sign In
         </Button>
+
+        <Form.Text className="text-muted">
+          Not having an account yet? Register <a href="../registration-view/registration-view">here!</a>
+        </Form.Text>
+
       </Form>
     </Container>
   );
 }
 
-/* LoginView.propTypes = {
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired
+LoginView.propTypes = {
+  handleSubmit: PropTypes.shape({
+    onLoggedIn: PropTypes.func.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired
+  })
 };
-*/
