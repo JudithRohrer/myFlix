@@ -33390,7 +33390,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user,
           register = _this$state.register;
-      if (!register) return _react.default.createElement(_registrationView.RegistrationView, {
+      if (!register && !user) return _react.default.createElement(_registrationView.RegistrationView, {
         onMemberClicked: function onMemberClicked() {
           return _this3.onMemberClicked();
         },
