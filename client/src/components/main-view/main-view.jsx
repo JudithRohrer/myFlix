@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-// import './main-view.scss';
+import './main-view.scss';
 
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
@@ -58,6 +58,11 @@ export class MainView extends React.Component {
     });
   }
 
+  onSignInClick() {
+    this.setState({
+      register: false
+    })
+  }
   onLoggedIn(user) {
     this.setState({
       user
@@ -78,7 +83,7 @@ export class MainView extends React.Component {
     if (!register) return <RegistrationView onMemberClicked={() => this.onMemberClicked()} onRegistered={user => this.onRegistered(user)} />;
 
 
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onSignInClick={() => this.onSignInClick()} />;
 
     // before the movies have been loaded
     if (!movies) return <div className="main-view" />;
@@ -91,7 +96,7 @@ export class MainView extends React.Component {
               ? <MovieView movie={selectedMovie}
                 onResetSelectedMovie={() => this.onResetSelectedMovie()} />
               : movies.map(movie => (
-                <Col key={movie._id} xs={12} sm={6} md={4}>
+                <Col key={movie._id} >
                   <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
                 </Col>
               ))

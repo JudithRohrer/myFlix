@@ -70,7 +70,7 @@ export function RegistrationView(props) {
           />
         </Form.Group>
 
-        <Button variant="dark" type="submit" onClick={handleRegistration}>Register me!</Button>
+        <Button variant="dark" onClick={handleRegistration}>Register me!</Button>
 
         <Button variant="link" onClick={(user) => props.onMemberClicked()}>Already a member?</Button>
 
