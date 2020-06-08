@@ -18,7 +18,7 @@ export function LoginView(props) {
 
   const onRegLinkClick = (e) => {
     e.preventDefault();
-    props.onSignInClick()
+    props.onSignUpClick()
   }
 
 

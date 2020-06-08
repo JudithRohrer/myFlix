@@ -58,7 +58,7 @@ export class MainView extends React.Component {
     });
   }
 
-  onSignInClick() {
+  onSignUpClick() {
     this.setState({
       register: false
     })
@@ -83,7 +83,7 @@ export class MainView extends React.Component {
     if (!register && !user) return <RegistrationView onMemberClicked={() => this.onMemberClicked()} onRegistered={user => this.onRegistered(user)} />;
 
 
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onSignInClick={() => this.onSignInClick()} />;
+    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onSignUpClick={() => this.onSignUpClick()} />;
 
     // before the movies have been loaded
     if (!movies) return <div className="main-view" />;

@@ -32691,7 +32691,7 @@ function LoginView(props) {
 
   var onRegLinkClick = function onRegLinkClick(e) {
     e.preventDefault();
-    props.onSignInClick();
+    props.onSignUpClick();
   };
 
   return _react.default.createElement(_Container.default, {
@@ -33359,8 +33359,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "onSignInClick",
-    value: function onSignInClick() {
+    key: "onSignUpClick",
+    value: function onSignUpClick() {
       this.setState({
         register: false
       });
@@ -33402,8 +33402,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         onLoggedIn: function onLoggedIn(user) {
           return _this3.onLoggedIn(user);
         },
-        onSignInClick: function onSignInClick() {
-          return _this3.onSignInClick();
+        onSignUpClick: function onSignUpClick() {
+          return _this3.onSignUpClick();
         }
       }); // before the movies have been loaded
 
