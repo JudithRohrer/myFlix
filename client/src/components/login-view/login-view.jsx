@@ -4,9 +4,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
-import { RegistrationView } from '../registration-view/registration-view';
-
-
 import './login-view.scss';
 
 export function LoginView(props) {
@@ -51,9 +48,13 @@ export function LoginView(props) {
         >Sign In
         </Button>
 
-        <Form.Text className="text-muted">
-          Not having an account yet? Register <a href="../registration-view/registration-view">here!</a>
-        </Form.Text>
+        <Button
+          className="register-button"
+          variant="light"
+          type="submit"
+          onClick={() => this.props.onRegLinkClick()}
+        >Or register now!
+        </Button>
 
       </Form>
     </Container>

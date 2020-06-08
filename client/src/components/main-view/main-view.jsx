@@ -22,7 +22,8 @@ export class MainView extends React.Component {
     this.state = {
       movies: null,
       selectedMovie: null,
-      user: null
+      user: null,
+      registerLinkClicked: false
     };
   }
 
@@ -56,10 +57,18 @@ export class MainView extends React.Component {
     });
   }
 
+  onRegLinkClick() {
+    this.setState({
+      registerLinkClicked: true
+    })
+  }
+
   render() {
     const { movies, selectedMovie, user } = this.state;
 
     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+
+    if ({ registerLinkClicked: true }) return <RegistrationView />;
 
     // before the movies have been loaded
     if (!movies) return <div className="main-view" />;
