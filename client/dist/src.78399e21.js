@@ -33182,8 +33182,13 @@ function RegistrationView(props) {
 
   var handleRegistration = function handleRegistration(e) {
     e.preventDefault();
-    console.log(username, password, email, birthday);
-    props.onRegistered(username);
+
+    if (!username || !password || !email || !birthday) {
+      return alert("Please fill out all asked information");
+    } else {
+      console.log(username, password, email, birthday);
+      props.onRegistered(username);
+    }
   };
 
   return _react.default.createElement(_Container.default, {
