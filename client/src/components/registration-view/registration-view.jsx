@@ -6,23 +6,26 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
 
-// import './registration-view.scss';
+import './registration-view.scss';
 
 export function RegistrationView(props) {
   const [username, createUsername] = useState('');
-  const [password, CreatePassword] = useState('');
+  const [password, createPassword] = useState('');
   const [email, createEmail] = useState('');
   const [birthday, createBirthday] = useState('');
 
-  const handleRegistration = e => {
+  const handleRegistration = (e) => {
     e.preventDefault();
     console.log(username, password, email, birthday);
-
-    props.onLoggedIn(username, password, email, birthday);
+    props.onRegistered(username);
   };
+
+
 
   return (
     <Container className="registrationContainer">
+      <h1>Welcome to myFlix</h1>
+      <h4>Come and join our wonderfull world of movies!</h4>
       <Form className="registrationForm">
         <Form.Group controlId="formBasicUsername">
           <Form.Label>Username:</Form.Label>
@@ -44,7 +47,7 @@ export function RegistrationView(props) {
           />
         </Form.Group>
 
-        <Form.Group controId="formBasicEmail">
+        <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
@@ -68,6 +71,9 @@ export function RegistrationView(props) {
         </Form.Group>
 
         <Button variant="dark" type="submit" onClick={handleRegistration}>Register me!</Button>
+
+        <Button variant="link" onClick={(user) => props.onMemberClicked()}>Already a member?</Button>
+
       </Form>
     </Container>
   );

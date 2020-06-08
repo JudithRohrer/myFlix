@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useImperativeHandle } from 'react';
 import axios from 'axios';
 
 
@@ -23,7 +23,7 @@ export class MainView extends React.Component {
       movies: null,
       selectedMovie: null,
       user: null,
-      registerLinkClicked: false
+      register: false
     };
   }
 
@@ -51,24 +51,34 @@ export class MainView extends React.Component {
     });
   }
 
+  onRegistered(user) {
+    this.setState({
+      user,
+      register: true
+    });
+  }
+
   onLoggedIn(user) {
     this.setState({
       user
     });
   }
 
-  onRegLinkClick() {
+  onMemberClicked() {
     this.setState({
-      registerLinkClicked: true
+      user: null,
+      register: true
     })
   }
 
+
   render() {
-    const { movies, selectedMovie, user } = this.state;
+    const { movies, selectedMovie, user, register } = this.state;
+
+    if (!register) return <RegistrationView onMemberClicked={() => this.onMemberClicked()} onRegistered={user => this.onRegistered(user)} />;
+
 
     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-
-    if ({ registerLinkClicked: true }) return <RegistrationView />;
 
     // before the movies have been loaded
     if (!movies) return <div className="main-view" />;

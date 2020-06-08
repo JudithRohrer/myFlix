@@ -16,6 +16,10 @@ export function LoginView(props) {
     props.onLoggedIn(username);
   };
 
+  const onRegLinkClick = (e) => {
+    return <RegistrationView />
+  }
+
 
   return (
     <Container className="loginContainer">
@@ -50,9 +54,9 @@ export function LoginView(props) {
 
         <Button
           className="register-button"
-          variant="light"
+          variant="link"
           type="submit"
-          onClick={() => this.props.onRegLinkClick()}
+          onClick={onRegLinkClick}
         >Or register now!
         </Button>
 
