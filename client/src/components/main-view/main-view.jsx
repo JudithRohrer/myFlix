@@ -39,6 +39,20 @@ export class MainView extends React.Component {
       });
   }
 
+  getMovies(token) {
+    axios.get('https://myflix-123-db.herokuapp.com/movies', {
+      headers: { Authorization: 'Bearer ${token' }
+    })
+      .then(response => {
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   onMovieClick(movie) {
     this.setState({
       selectedMovie: movie
@@ -63,10 +77,15 @@ export class MainView extends React.Component {
       register: false
     })
   }
-  onLoggedIn(user) {
+  onLoggedIn(authData) {
+    console.log(authData);
     this.setState({
-      user
+      user: authData.user.username
     });
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.username);
+    this.getMovies(authData.token);
   }
 
   onMemberClicked() {

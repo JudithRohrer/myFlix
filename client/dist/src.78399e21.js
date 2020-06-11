@@ -33348,6 +33348,23 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "getMovies",
+    value: function getMovies(token) {
+      var _this3 = this;
+
+      _axios.default.get('https://myflix-123-db.herokuapp.com/movies', {
+        headers: {
+          Authorization: 'Bearer ${token'
+        }
+      }).then(function (response) {
+        _this3.setState({
+          movies: response.data
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
     key: "onMovieClick",
     value: function onMovieClick(movie) {
       this.setState({
@@ -33378,10 +33395,14 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "onLoggedIn",
-    value: function onLoggedIn(user) {
+    value: function onLoggedIn(authData) {
+      console.log(authData);
       this.setState({
-        user: user
+        user: authData.user.username
       });
+      localStorage.setItem('token', authData.token);
+      localStorage.setItem('user', authData.user.username);
+      this.getMovies(authData.token);
     }
   }, {
     key: "onMemberClicked",
@@ -33394,7 +33415,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var _this$state = this.state,
           movies = _this$state.movies,
@@ -33403,18 +33424,18 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           register = _this$state.register;
       if (!register && !user) return _react.default.createElement(_registrationView.RegistrationView, {
         onMemberClicked: function onMemberClicked() {
-          return _this3.onMemberClicked();
+          return _this4.onMemberClicked();
         },
         onRegistered: function onRegistered(user) {
-          return _this3.onRegistered(user);
+          return _this4.onRegistered(user);
         }
       });
       if (!user) return _react.default.createElement(_loginView.LoginView, {
         onLoggedIn: function onLoggedIn(user) {
-          return _this3.onLoggedIn(user);
+          return _this4.onLoggedIn(user);
         },
         onSignUpClick: function onSignUpClick() {
-          return _this3.onSignUpClick();
+          return _this4.onSignUpClick();
         }
       }); // before the movies have been loaded
 
@@ -33426,7 +33447,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }, _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
         movie: selectedMovie,
         onResetSelectedMovie: function onResetSelectedMovie() {
-          return _this3.onResetSelectedMovie();
+          return _this4.onResetSelectedMovie();
         }
       }) : movies.map(function (movie) {
         return _react.default.createElement(_Col.default, {
@@ -33435,7 +33456,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           key: movie._id,
           movie: movie,
           onClick: function onClick(movie) {
-            return _this3.onMovieClick(movie);
+            return _this4.onMovieClick(movie);
           }
         }));
       }))));
