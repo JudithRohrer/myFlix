@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
+
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+
 
 import './movie-view.scss';
 
@@ -26,9 +29,19 @@ export class MovieView extends React.Component {
           <Card.Body>
             <Card.Title>{movie.title}</Card.Title>
             <Card.Text>Description: {movie.description}</Card.Text>
-            <Card.Text>Genre: {movie.genre.name}</Card.Text>
-            <Card.Text>Director: {movie.director.name}</Card.Text>
-            <Button variant="light" onClick={() => this.props.onResetSelectedMovie()}>Back</Button>
+            <Card.Text>Genre:
+            <Link to={`/genres/${movie.genre.name}`}>
+                <Button variant="link">{movie.genre.name}</Button>
+              </Link>
+            </Card.Text>
+            <Card.Text>Director:
+            <Link to={`/directors/${movie.director.name}`}>
+                <Button variant="link">{movie.director.name}</Button>
+              </Link>
+            </Card.Text>
+            <Link to={`/`}>
+              <Button variant="light">Back</Button>
+            </Link>
           </Card.Body>
         </Card>
       </div>
@@ -52,5 +65,5 @@ MovieView.propTypes = {
     imagePath: PropTypes.string.isRequired,
     featured: PropTypes.bool.isRequired
   }).isRequired,
-  onResetSelectedMovie: PropTypes.func.isRequired
+  //onResetSelectedMovie: PropTypes.func.isRequired
 };

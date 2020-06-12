@@ -1,3 +1,12 @@
+.main-view {
+  margin-top: 50px;
+}
+
+.Logout-button {
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+}
 .loginContainer {
   width: 350px;
   margin: 200px auto;
@@ -7,7 +16,7 @@
 }
 .cardBody {
   box-shadow: 10px 10px 40px grey;
-  margin-top: 30px;
+  margin: 30px 20px;
 }
 
 .cardImage {
@@ -15,7 +24,7 @@
 }
 .FormMovie {
   box-shadow: 10px 10px 40px grey;
-  margin: 50px auto;
+  margin: 100px auto;
 }
 .registrationContainer {
   margin: 50px auto;

@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
+import { Link } from 'react-router-dom';
+
 import './movie-card.scss';
 
 export class MovieCard extends React.Component {
   render() {
-    const { movie, onClick } = this.props;
+    const { movie } = this.props;
 
     return (
       <Card className="cardBody" style={{ width: '20rem' }}>
@@ -15,7 +17,9 @@ export class MovieCard extends React.Component {
         <Card.Body>
           <Card.Title>{movie.title}</Card.Title>
           <Card.Text>{movie.description}</Card.Text>
-          <Button onClick={() => onClick(movie)} variant="dark">Open</Button>
+          <Link to={`/movies/${movie._id}`}>
+            <Button variant="dark">Open</Button>
+          </Link>
         </Card.Body>
       </Card>
     );
@@ -38,5 +42,5 @@ MovieCard.propTypes = {
     imagePath: PropTypes.string.isRequired,
     featured: PropTypes.bool.isRequired
   }).isRequired,
-  onClick: PropTypes.func.isRequired
+  //onClick: PropTypes.func.isRequired
 };
