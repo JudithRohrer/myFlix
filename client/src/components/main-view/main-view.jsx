@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, useParams } from 'react-router-dom';
 
 
 import Container from 'react-bootstrap/Container';
@@ -15,6 +15,8 @@ import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
+import { DirectorView } from '../director-view/director-view';
+import { GenreView } from '../genre-view/genre-view';
 
 export class MainView extends React.Component {
 
@@ -106,7 +108,7 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, selectedMovie, user, register } = this.state;
+    const { movies, user, register } = this.state;
 
     if (!register && !user) return <RegistrationView onMemberClicked={() => this.onMemberClicked()} />;
 
@@ -127,6 +129,7 @@ export class MainView extends React.Component {
               type="submit"
               onClick={() => this.onLoggedOut()}>Logout
           </Button>
+
             <Row>
 
               <Route exact path="/" render={() => {
@@ -149,6 +152,9 @@ export class MainView extends React.Component {
                   return <div className="main-view" />;
                 return <DirectorView director={movies.find(m => m.director.name === match.params.name).director} />
               }} />
+
+              <Route path="/users/:username" render={({ match }) => <ProfileView profile={users.find(u = u._id === match.params.userId)} />} />
+
             </Row>
 
 
