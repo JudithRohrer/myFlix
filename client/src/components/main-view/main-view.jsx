@@ -156,21 +156,6 @@ export class MainView extends React.Component {
               <Route path="/users/:username" render={({ match }) => <ProfileView profile={users.find(u = u._id === match.params.userId)} />} />
 
             </Row>
-
-
-
-
-            {/*        <Row>
-              {selectedMovie
-                ? <MovieView movie={selectedMovie}
-                  onResetSelectedMovie={() => this.onResetSelectedMovie()} />
-                : movies.map(movie => (
-                  <Col key={movie._id} >
-                    <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
-                  </Col>
-                ))
-              }
-            </Row>*/}
           </Container>
         </div>
       </Router>

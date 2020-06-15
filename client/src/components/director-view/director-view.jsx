@@ -26,18 +26,20 @@ export class DirectorView extends React.Component {
     if (!director) return null;
 
     return (
-      <div className="director-view">
-        <Card className="cardBody" style={{ width: '20rem' }}>
-          <Card.Body>
-            <Card.Title>{director.name}</Card.Title>
-            <Card.Text>Director Bio: {director.bio}</Card.Text>
-            <Card.Text>Birth Year: {director.birth}</Card.Text>
-            <Link to={`/`}>
-              <Button variant="light">Close</Button>
-            </Link>
-          </Card.Body>
-        </Card>
-      </div>
+      <Container>
+        <div className="director-view">
+          <Card className="cardBody" style={{ width: '20rem' }}>
+            <Card.Body>
+              <Card.Title>{director.name}</Card.Title>
+              <Card.Text>{director.bio}</Card.Text>
+              <Card.Text>Birth Year: {director.birth}</Card.Text>
+              <Link to={`/`}>
+                <Button variant="light">Close</Button>
+              </Link>
+            </Card.Body>
+          </Card>
+        </div>
+      </Container>
     );
   }
 }

@@ -6,7 +6,7 @@ import Axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import Card, { CardTitle } from 'react-bootstrap/Card';
 
 
 
@@ -23,20 +23,24 @@ export class GenreView extends React.Component {
   render() {
     const { movies, genre } = this.props;
 
+    if (!genre) return null;
+
     return (
-      <div className="genre-view">
+      <Container className="genre-view">
         <Card className="cardBody" style={{ width: '20rem' }}>
           <Card.Body>
             <Card.Title>{genre.name}</Card.Title>
-            <Card.Text>Description: {gerne.description}</Card.Text>
+            <Card.Text>{genre.description}</Card.Text>
 
             <Link to={`/`}>
               <Button variant="light">Close</Button>
             </Link>
           </Card.Body>
         </Card>
-      </div>
+      </Container>
     );
+
+
   }
 }
 

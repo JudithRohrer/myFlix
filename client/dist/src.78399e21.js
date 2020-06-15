@@ -39421,18 +39421,18 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
           movies = _this$props.movies,
           director = _this$props.director;
       if (!director) return null;
-      return _react.default.createElement("div", {
+      return _react.default.createElement(_Container.default, null, _react.default.createElement("div", {
         className: "director-view"
       }, _react.default.createElement(_Card.default, {
         className: "cardBody",
         style: {
           width: '20rem'
         }
-      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, director.name), _react.default.createElement(_Card.default.Text, null, "Director Bio: ", director.bio), _react.default.createElement(_Card.default.Text, null, "Birth Year: ", director.birth), _react.default.createElement(_reactRouterDom.Link, {
+      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, director.name), _react.default.createElement(_Card.default.Text, null, director.bio), _react.default.createElement(_Card.default.Text, null, "Birth Year: ", director.birth), _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
       }, _react.default.createElement(_Button.default, {
         variant: "light"
-      }, "Close")))));
+      }, "Close"))))));
     }
   }]);
 
@@ -39474,9 +39474,13 @@ var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
 
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
-var _Card = _interopRequireDefault(require("react-bootstrap/Card"));
+var _Card = _interopRequireWildcard(require("react-bootstrap/Card"));
 
 require("./genre-view.scss");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39523,14 +39527,15 @@ var GenreView = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           movies = _this$props.movies,
           genre = _this$props.genre;
-      return _react.default.createElement("div", {
+      if (!genre) return null;
+      return _react.default.createElement(_Container.default, {
         className: "genre-view"
       }, _react.default.createElement(_Card.default, {
         className: "cardBody",
         style: {
           width: '20rem'
         }
-      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, genre.name), _react.default.createElement(_Card.default.Text, null, "Description: ", gerne.description), _react.default.createElement(_reactRouterDom.Link, {
+      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, genre.name), _react.default.createElement(_Card.default.Text, null, genre.description), _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
       }, _react.default.createElement(_Button.default, {
         variant: "light"
