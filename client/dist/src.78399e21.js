@@ -39642,6 +39642,8 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (response) {
+        console.log(response);
+
         _this2.setState({
           username: response.data.username,
           password: response.data.password,
@@ -39656,7 +39658,12 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, "hello");
+      var _this$state = this.state,
+          username = _this$state.username,
+          email = _this$state.email,
+          birthday = _this$state.birthday,
+          favorites = _this$state.favorites;
+      return _react.default.createElement("div", null, _react.default.createElement("h1", null, "My Profile:"), _react.default.createElement("p", null, "Username: ", username), _react.default.createElement("p", null, "Email: ", email), _react.default.createElement("p", null, "Birthday: ", birthday), _react.default.createElement("p", null, "My Favorite Movies: ", favorites));
     }
   }]);
 
