@@ -104,6 +104,22 @@ app.get('/directors/:name', passport.authenticate('jwt', { session: false }), (r
   });
 });
 
+// Get a user by username
+app.get(
+  '/users/:username',
+  passport.authenticate('jwt', { session: false }),
+  function (req, res) {
+    Users.findOne({ username: req.params.username })
+      .then(function (user) {
+        res.json(user);
+      })
+      .catch(function (err) {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      });
+  }
+);
+
 //POST a new user to the registry
 app.post('/users', [
   check('username', 'Username is too short').isLength({ min: 5 }),

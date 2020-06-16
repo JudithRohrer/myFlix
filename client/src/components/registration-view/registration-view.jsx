@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 
 import './registration-view.scss';
-import Axios from 'axios';
+import axios from 'axios';
 
 export function RegistrationView(props) {
   const [username, createUsername] = useState('');

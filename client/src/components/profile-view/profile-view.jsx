@@ -1,16 +1,15 @@
-iimport React from 'react';
-import PropTypes from 'prop-types';
-import './profile-view.scss';
+import React from 'react';
+import axios from 'axios';
+
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+
 import { Link } from "react-router-dom";
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+
+
 
 
 
@@ -18,28 +17,61 @@ export class ProfileView extends React.Component {
 
   constructor() {
     super();
-    this.state = {};
+
+    this.state = {
+      username: null,
+      password: null,
+      email: null,
+      birthday: null,
+      favorites: []
+    };
   }
+
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getUsers(accessToken);
+    }
+  }
+
+
+
+  getUsers(token) {
+    axios.get(`https://myflix-123-db.herokuapp.com/users/${localStorage.getItem('user')}`, {
+
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        this.setState({
+          username: response.data.username,
+          password: response.data.password,
+          email: response.data.email,
+          birthday: response.data.birthday,
+          favorites: response.data.favorites
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
+
+
 
   render() {
-    const { user } = this.props;
-    console.log(user)
 
 
-    if (!user) return null;
 
     return (
-      <Card style={{ width: '20rem', height: '40rem', margin: '2rem' }}>
-        <Card.Body>
-          <Card.Title>{user.Username}</Card.Title>
-          <Card.Text>{user.Name}</Card.Text>
-          <Card.Text>{user.Email}</Card.Text>
-          <Card.Text>{user.Password}</Card.Text>
-          <Link to={`/`} >
-            <Button className="button-card" variant="info">Back</Button>
-          </Link>
-        </Card.Body>
-      </Card>
-    );
+      <div>
+        hello</div>
+
+
+    )
   }
-} 
+}
+
