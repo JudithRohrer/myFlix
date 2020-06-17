@@ -39432,7 +39432,27 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
         to: "/"
       }, _react.default.createElement(_Button.default, {
         variant: "light"
-      }, "Close"))))));
+      }, "Close"))))), _react.default.createElement("div", {
+        className: "d-flex row mt-3 ml-1"
+      }, movies.map(function (movie) {
+        if (movie.director.Name === director.name) {
+          return _react.default.createElement("div", {
+            key: movie._id
+          }, _react.default.createElement(_Card.default, {
+            className: "director-view-card box-shadow",
+            style: {
+              width: "16rem"
+            }
+          }, _react.default.createElement(_Card.default.Img, {
+            variant: "top",
+            src: movie.imagePath
+          }), _react.default.createElement(_reactRouterDom.Link, {
+            to: "/movies/".concat(movie._id)
+          }, _react.default.createElement(_Card.default.Header, {
+            className: "director-card-title-link text-center font-weight-bold"
+          }, movie.title)), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Text, null, movie.description))));
+        }
+      })));
     }
   }]);
 
@@ -39524,9 +39544,7 @@ var GenreView = /*#__PURE__*/function (_React$Component) {
   _createClass(GenreView, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          movies = _this$props.movies,
-          genre = _this$props.genre;
+      var genre = this.props.genre;
       if (!genre) return null;
       return _react.default.createElement(_Container.default, {
         className: "genre-view"
@@ -39561,7 +39579,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ProfileView = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -39573,9 +39591,17 @@ var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 
 var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
 
+var _Card = _interopRequireDefault(require("react-bootstrap/Card"));
+
+var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+
 var _reactRouterDom = require("react-router-dom");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -39648,7 +39674,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           username: response.data.username,
           password: response.data.password,
           email: response.data.email,
-          birthday: response.data.birthday,
+          birthday: response.data.birthday ? response.data.birthday.substr(0, 10) : " ",
           favorites: response.data.favorites
         });
       }).catch(function (error) {
@@ -39663,7 +39689,12 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           email = _this$state.email,
           birthday = _this$state.birthday,
           favorites = _this$state.favorites;
-      return _react.default.createElement("div", null, _react.default.createElement("h1", null, "My Profile:"), _react.default.createElement("p", null, "Username: ", username), _react.default.createElement("p", null, "Email: ", email), _react.default.createElement("p", null, "Birthday: ", birthday), _react.default.createElement("p", null, "My Favorite Movies: ", favorites));
+      return _react.default.createElement("div", null, _react.default.createElement(_Card.default, {
+        className: "Profile-Card",
+        style: {
+          width: '28rem'
+        }
+      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, username), _react.default.createElement(_Card.default.Text, null, "Password: ######"), _react.default.createElement(_Card.default.Text, null, "Email: ", email), _react.default.createElement(_Card.default.Text, null, "Birthday: ", birthday), _react.default.createElement(_Card.default.Text, null, "My favorite movies: ", favorites))));
     }
   }]);
 
@@ -39671,7 +39702,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.ProfileView = ProfileView;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

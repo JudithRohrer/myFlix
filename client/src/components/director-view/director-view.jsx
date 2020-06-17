@@ -39,6 +39,26 @@ export class DirectorView extends React.Component {
             </Card.Body>
           </Card>
         </div>
+
+        <div className="d-flex row mt-3 ml-1">
+          {movies.map(movie => {
+            if (movie.director.Name === director.name) {
+              return (
+                <div key={movie._id}>
+                  <Card className="director-view-card box-shadow" style={{ width: "16rem" }}>
+                    <Card.Img variant="top" src={movie.imagePath} />
+                    <Link to={`/movies/${movie._id}`}>
+                      <Card.Header className="director-card-title-link text-center font-weight-bold">{movie.title}</Card.Header>
+                    </Link>
+                    <Card.Body>
+                      <Card.Text>{movie.description}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </div>
+              );
+            }
+          })}
+        </div>
       </Container>
     );
   }

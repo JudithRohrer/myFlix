@@ -21,7 +21,7 @@ export class GenreView extends React.Component {
   }
 
   render() {
-    const { movies, genre } = this.props;
+    const { genre } = this.props;
 
     if (!genre) return null;
 
