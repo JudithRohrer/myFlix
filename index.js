@@ -109,7 +109,10 @@ app.get(
   '/users/:username',
   passport.authenticate('jwt', { session: false }),
   function (req, res) {
-    Users.findOne({ username: req.params.username })
+    Users.findOne({ username: req.params.username }).populate({
+      path: 'favorites',
+      model: 'Movies'
+    })
       .then(function (user) {
         res.json(user);
       })

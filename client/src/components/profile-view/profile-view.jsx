@@ -68,8 +68,6 @@ export class ProfileView extends React.Component {
     const { username, email, birthday, favorites } = this.state;
 
 
-
-
     return (
       <div>
         <Card className="Profile-Card" style={{ width: '28rem' }}>
