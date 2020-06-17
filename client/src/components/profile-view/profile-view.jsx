@@ -78,6 +78,13 @@ export class ProfileView extends React.Component {
     this.setState;
   }
 
+  /*updateProfile() {
+    e.preventDefault();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [birthday, setBirthday] = useState('');
+  }*/
 
 
 
@@ -85,10 +92,6 @@ export class ProfileView extends React.Component {
 
     const { username, email, birthday, favorites } = this.state;
 
-    const [Username, setUsername] = useState('');
-    const [Password, setPassword] = useState('');
-    const [Email, setEmail] = useState('');
-    const [Birthday, setBirthday] = useState('');
 
 
 
@@ -132,8 +135,8 @@ export class ProfileView extends React.Component {
             <Form.Control
               type="text"
               placeholder="Username"
-              value={Username}
-              onChange={e => setUsername(e.target.value)}
+            /*value={Username}
+            onChange={e => setUsername(e.target.value)}*/
             />
           </Form.Group>
 
@@ -142,8 +145,8 @@ export class ProfileView extends React.Component {
             <Form.Control
               type="text"
               placeholder="Password"
-              value={Password}
-              onChange={e => setPassword(e.target.value)}
+            /* value={Password}
+             onChange={e => setPassword(e.target.value)}*/
             />
           </Form.Group>
 
@@ -152,8 +155,8 @@ export class ProfileView extends React.Component {
             <Form.Control
               type="email"
               placeholder="Enter email"
-              value={Email}
-              onChange={e => setEmail(e.target.value)}
+            /* value={Email}
+             onChange={e => setEmail(e.target.value)}*/
             />
             <Form.Text className="text-muted">
               We will never share your information with anyone
@@ -165,8 +168,8 @@ export class ProfileView extends React.Component {
             <Form.Control
               type="date"
               placeholder="1985-09-29"
-              value={Birthday}
-              onChange={e => setBirthday(e.target.value)}
+            /*value={Birthday}
+            onChange={e => setBirthday(e.target.value)}*/
             />
           </Form.Group>
 

@@ -39605,18 +39605,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -39712,6 +39700,14 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 
       this.setState;
     }
+    /*updateProfile() {
+      e.preventDefault();
+      const [username, setUsername] = useState('');
+      const [password, setPassword] = useState('');
+      const [email, setEmail] = useState('');
+      const [birthday, setBirthday] = useState('');
+    }*/
+
   }, {
     key: "render",
     value: function render() {
@@ -39722,27 +39718,6 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           email = _this$state.email,
           birthday = _this$state.birthday,
           favorites = _this$state.favorites;
-
-      var _useState = (0, _react.useState)(''),
-          _useState2 = _slicedToArray(_useState, 2),
-          Username = _useState2[0],
-          setUsername = _useState2[1];
-
-      var _useState3 = (0, _react.useState)(''),
-          _useState4 = _slicedToArray(_useState3, 2),
-          Password = _useState4[0],
-          setPassword = _useState4[1];
-
-      var _useState5 = (0, _react.useState)(''),
-          _useState6 = _slicedToArray(_useState5, 2),
-          Email = _useState6[0],
-          setEmail = _useState6[1];
-
-      var _useState7 = (0, _react.useState)(''),
-          _useState8 = _slicedToArray(_useState7, 2),
-          Birthday = _useState8[0],
-          setBirthday = _useState8[1];
-
       return _react.default.createElement("div", null, _react.default.createElement(_Card.default, {
         className: "Profile-Card",
         style: {
@@ -39776,40 +39751,36 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         controlId: "formBasicUsername"
       }, _react.default.createElement(_Form.default.Label, null, "Username:"), _react.default.createElement(_Form.default.Control, {
         type: "text",
-        placeholder: "Username",
-        value: Username,
-        onChange: function onChange(e) {
-          return setUsername(e.target.value);
-        }
+        placeholder: "Username"
+        /*value={Username}
+        onChange={e => setUsername(e.target.value)}*/
+
       })), _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicPassword"
       }, _react.default.createElement(_Form.default.Label, null, "Password:"), _react.default.createElement(_Form.default.Control, {
         type: "text",
-        placeholder: "Password",
-        value: Password,
-        onChange: function onChange(e) {
-          return setPassword(e.target.value);
-        }
+        placeholder: "Password"
+        /* value={Password}
+         onChange={e => setPassword(e.target.value)}*/
+
       })), _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicEmail"
       }, _react.default.createElement(_Form.default.Label, null, "Email address"), _react.default.createElement(_Form.default.Control, {
         type: "email",
-        placeholder: "Enter email",
-        value: Email,
-        onChange: function onChange(e) {
-          return setEmail(e.target.value);
-        }
+        placeholder: "Enter email"
+        /* value={Email}
+         onChange={e => setEmail(e.target.value)}*/
+
       }), _react.default.createElement(_Form.default.Text, {
         className: "text-muted"
       }, "We will never share your information with anyone")), _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicBirthday"
       }, _react.default.createElement(_Form.default.Label, null, "Date of Birth"), _react.default.createElement(_Form.default.Control, {
         type: "date",
-        placeholder: "1985-09-29",
-        value: Birthday,
-        onChange: function onChange(e) {
-          return setBirthday(e.target.value);
-        }
+        placeholder: "1985-09-29"
+        /*value={Birthday}
+        onChange={e => setBirthday(e.target.value)}*/
+
       })), _react.default.createElement(_Button.default, {
         variant: "dark"
       }, "Register me!")));
