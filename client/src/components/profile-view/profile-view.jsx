@@ -25,7 +25,11 @@ export class ProfileView extends React.Component {
       password: null,
       email: null,
       birthday: null,
-      favorites: []
+      favorites: [],
+      usernameField: '',
+      passwordField: '',
+      emailField: '',
+      birthdayField: ''
     };
   }
 
@@ -62,6 +66,32 @@ export class ProfileView extends React.Component {
   }
 
 
+  setUsernameField(NewUsername) {
+    this.setState({
+      usernameField: NewUsername
+    });
+  }
+
+  setPasswordField(NewPassword) {
+    this.setState({
+      passwordField: NewPassword
+    });
+  }
+
+  setEmailField(NewEmail) {
+    this.setState({
+      emailField: NewEmail
+    });
+  }
+
+  setBirthdayField(NewBirthday) {
+    this.setState({
+      birthdayField: NewBirthday
+    });
+  }
+
+
+
   deleteFavMovie(movieId) {
     axios
       .delete(`https://myflix-123-db.herokuapp.com/users/${localStorage.getItem('user')}/favorites/${movieId}`, {
@@ -78,21 +108,13 @@ export class ProfileView extends React.Component {
     this.setState;
   }
 
-  /*updateProfile() {
-    e.preventDefault();
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [birthday, setBirthday] = useState('');
-  }*/
+
 
 
 
   render() {
 
     const { username, email, birthday, favorites } = this.state;
-
-
 
 
 
@@ -131,12 +153,13 @@ export class ProfileView extends React.Component {
 
         <Form className="registrationForm">
           <Form.Group controlId="formBasicUsername">
+            <h3>Need to update your user information?</h3>
             <Form.Label>Username:</Form.Label>
             <Form.Control
               type="text"
               placeholder="Username"
-            /*value={Username}
-            onChange={e => setUsername(e.target.value)}*/
+              value={this.state.usernameField}
+              onChange={e => this.setUsernameField(e.target.value)}
             />
           </Form.Group>
 
@@ -145,8 +168,8 @@ export class ProfileView extends React.Component {
             <Form.Control
               type="text"
               placeholder="Password"
-            /* value={Password}
-             onChange={e => setPassword(e.target.value)}*/
+              value={this.state.passwordField}
+              onChange={e => this.setPasswordField(e.target.value)}
             />
           </Form.Group>
 
@@ -155,8 +178,8 @@ export class ProfileView extends React.Component {
             <Form.Control
               type="email"
               placeholder="Enter email"
-            /* value={Email}
-             onChange={e => setEmail(e.target.value)}*/
+              value={this.state.emailField}
+              onChange={e => this.setEmailField(e.target.value)}
             />
             <Form.Text className="text-muted">
               We will never share your information with anyone
@@ -168,12 +191,12 @@ export class ProfileView extends React.Component {
             <Form.Control
               type="date"
               placeholder="1985-09-29"
-            /*value={Birthday}
-            onChange={e => setBirthday(e.target.value)}*/
+              value={this.state.birthdayField}
+              onChange={e => this.setBirthdayField(e.target.value)}
             />
           </Form.Group>
 
-          <Button variant="dark" >Register me!</Button>
+          <Button variant="info">Update Profile</Button>
 
 
         </Form>

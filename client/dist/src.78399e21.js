@@ -39641,7 +39641,11 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       password: null,
       email: null,
       birthday: null,
-      favorites: []
+      favorites: [],
+      usernameField: '',
+      passwordField: '',
+      emailField: '',
+      birthdayField: ''
     };
     return _this;
   }
@@ -39682,6 +39686,34 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "setUsernameField",
+    value: function setUsernameField(NewUsername) {
+      this.setState({
+        usernameField: NewUsername
+      });
+    }
+  }, {
+    key: "setPasswordField",
+    value: function setPasswordField(NewPassword) {
+      this.setState({
+        passwordField: NewPassword
+      });
+    }
+  }, {
+    key: "setEmailField",
+    value: function setEmailField(NewEmail) {
+      this.setState({
+        emailField: NewEmail
+      });
+    }
+  }, {
+    key: "setBirthdayField",
+    value: function setBirthdayField(NewBirthday) {
+      this.setState({
+        birthdayField: NewBirthday
+      });
+    }
+  }, {
     key: "deleteFavMovie",
     value: function deleteFavMovie(movieId) {
       var _this3 = this;
@@ -39700,14 +39732,6 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 
       this.setState;
     }
-    /*updateProfile() {
-      e.preventDefault();
-      const [username, setUsername] = useState('');
-      const [password, setPassword] = useState('');
-      const [email, setEmail] = useState('');
-      const [birthday, setBirthday] = useState('');
-    }*/
-
   }, {
     key: "render",
     value: function render() {
@@ -39749,41 +39773,45 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         className: "registrationForm"
       }, _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicUsername"
-      }, _react.default.createElement(_Form.default.Label, null, "Username:"), _react.default.createElement(_Form.default.Control, {
+      }, _react.default.createElement("h3", null, "Need to update your user information?"), _react.default.createElement(_Form.default.Label, null, "Username:"), _react.default.createElement(_Form.default.Control, {
         type: "text",
-        placeholder: "Username"
-        /*value={Username}
-        onChange={e => setUsername(e.target.value)}*/
-
+        placeholder: "Username",
+        value: this.state.usernameField,
+        onChange: function onChange(e) {
+          return _this4.setUsernameField(e.target.value);
+        }
       })), _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicPassword"
       }, _react.default.createElement(_Form.default.Label, null, "Password:"), _react.default.createElement(_Form.default.Control, {
         type: "text",
-        placeholder: "Password"
-        /* value={Password}
-         onChange={e => setPassword(e.target.value)}*/
-
+        placeholder: "Password",
+        value: this.state.passwordField,
+        onChange: function onChange(e) {
+          return _this4.setPasswordField(e.target.value);
+        }
       })), _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicEmail"
       }, _react.default.createElement(_Form.default.Label, null, "Email address"), _react.default.createElement(_Form.default.Control, {
         type: "email",
-        placeholder: "Enter email"
-        /* value={Email}
-         onChange={e => setEmail(e.target.value)}*/
-
+        placeholder: "Enter email",
+        value: this.state.emailField,
+        onChange: function onChange(e) {
+          return _this4.setEmailField(e.target.value);
+        }
       }), _react.default.createElement(_Form.default.Text, {
         className: "text-muted"
       }, "We will never share your information with anyone")), _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicBirthday"
       }, _react.default.createElement(_Form.default.Label, null, "Date of Birth"), _react.default.createElement(_Form.default.Control, {
         type: "date",
-        placeholder: "1985-09-29"
-        /*value={Birthday}
-        onChange={e => setBirthday(e.target.value)}*/
-
+        placeholder: "1985-09-29",
+        value: this.state.birthdayField,
+        onChange: function onChange(e) {
+          return _this4.setBirthdayField(e.target.value);
+        }
       })), _react.default.createElement(_Button.default, {
-        variant: "dark"
-      }, "Register me!")));
+        variant: "info"
+      }, "Update Profile")));
     }
   }]);
 
