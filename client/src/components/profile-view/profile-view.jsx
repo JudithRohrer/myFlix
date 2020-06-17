@@ -85,7 +85,10 @@ export class ProfileView extends React.Component {
 
     const { username, email, birthday, favorites } = this.state;
 
-
+    const [Username, setUsername] = useState('');
+    const [Password, setPassword] = useState('');
+    const [Email, setEmail] = useState('');
+    const [Birthday, setBirthday] = useState('');
 
 
 
