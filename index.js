@@ -111,7 +111,7 @@ app.get(
   function (req, res) {
     Users.findOne({ username: req.params.username }).populate({
       path: 'favorites',
-      model: 'Movies'
+      model: 'Movie'
     })
       .then(function (user) {
         res.json(user);
