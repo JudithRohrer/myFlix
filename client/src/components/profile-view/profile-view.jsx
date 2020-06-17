@@ -70,22 +70,36 @@ export class ProfileView extends React.Component {
 
     return (
       <div>
-        <Card className="Profile-Card" style={{ width: '28rem' }}>
+        <Card className="Profile-Card" style={{ width: '34rem' }}>
           <Card.Body>
             <Card.Title>{username}</Card.Title>
             <Card.Text>Password: ######</Card.Text>
             <Card.Text>Email: {email}</Card.Text>
             <Card.Text>Birthday: {birthday}</Card.Text>
-            <Card.Text>My favorite movies: {favorites}</Card.Text>
+
           </Card.Body>
+          <Card.Footer>
+
+            <h4>{username}'s favorite movies: </h4>
+
+            <div className="d-flex">
+              {favorites == 0 && <h2> No favourites yet!</h2>}
+              {favorites &&
+                favorites.map(movie => {
+                  return (
+                    <div key={movie._id}>
+                      <Card className="profile-view-card box-shadow" style={{ width: "10rem" }}>
+                        <Link to={`/movies/${movie._id}`}>
+                          <Card.Img variant="top" src={movie.imagePath} />
+                        </Link>
+                      </Card>
+                    </div>
+                  );
+                })}
+            </div>
+          </Card.Footer>
         </Card>
-
-
-
-
-
-
-      </div >
+      </div>
     )
   }
 }

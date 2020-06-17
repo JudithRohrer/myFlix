@@ -39692,9 +39692,25 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       return _react.default.createElement("div", null, _react.default.createElement(_Card.default, {
         className: "Profile-Card",
         style: {
-          width: '28rem'
+          width: '34rem'
         }
-      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, username), _react.default.createElement(_Card.default.Text, null, "Password: ######"), _react.default.createElement(_Card.default.Text, null, "Email: ", email), _react.default.createElement(_Card.default.Text, null, "Birthday: ", birthday), _react.default.createElement(_Card.default.Text, null, "My favorite movies: ", favorites))));
+      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, username), _react.default.createElement(_Card.default.Text, null, "Password: ######"), _react.default.createElement(_Card.default.Text, null, "Email: ", email), _react.default.createElement(_Card.default.Text, null, "Birthday: ", birthday)), _react.default.createElement(_Card.default.Footer, null, _react.default.createElement("h4", null, username, "'s favorite movies: "), _react.default.createElement("div", {
+        className: "d-flex"
+      }, favorites == 0 && _react.default.createElement("h2", null, " No favourites yet!"), favorites && favorites.map(function (movie) {
+        return _react.default.createElement("div", {
+          key: movie._id
+        }, _react.default.createElement(_Card.default, {
+          className: "profile-view-card box-shadow",
+          style: {
+            width: "10rem"
+          }
+        }, _react.default.createElement(_reactRouterDom.Link, {
+          to: "/movies/".concat(movie._id)
+        }, _react.default.createElement(_Card.default.Img, {
+          variant: "top",
+          src: movie.imagePath
+        }))));
+      })))));
     }
   }]);
 
