@@ -39682,8 +39682,29 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "deleteFavMovie",
+    value: function deleteFavMovie(movieId) {
+      var _this3 = this;
+
+      _axios.default.delete("https://myflix-123-db.herokuapp.com/users/".concat(localStorage.getItem('user'), "/favorites/").concat(movieId), {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem("token"))
+        }
+      }).then(function (res) {
+        _this3.setState({
+          favorites: res.data.favorites
+        });
+      }).catch(function () {
+        console.log("Cannot delete movie from list");
+      });
+
+      this.setState;
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       var _this$state = this.state,
           username = _this$state.username,
           email = _this$state.email,
@@ -39696,7 +39717,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         }
       }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, username), _react.default.createElement(_Card.default.Text, null, "Password: ######"), _react.default.createElement(_Card.default.Text, null, "Email: ", email), _react.default.createElement(_Card.default.Text, null, "Birthday: ", birthday)), _react.default.createElement(_Card.default.Footer, null, _react.default.createElement("h4", null, username, "'s favorite movies: "), _react.default.createElement("div", {
         className: "d-flex"
-      }, favorites == 0 && _react.default.createElement("h2", null, " No favourites yet!"), favorites && favorites.map(function (movie) {
+      }, favorites == 0 && _react.default.createElement("h2", null, " No favorites yet!"), favorites && favorites.map(function (movie) {
         return _react.default.createElement("div", {
           key: movie._id
         }, _react.default.createElement(_Card.default, {
@@ -39709,8 +39730,56 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         }, _react.default.createElement(_Card.default.Img, {
           variant: "top",
           src: movie.imagePath
-        }))));
-      })))));
+        })), _react.default.createElement(_Button.default, {
+          variant: "outline-danger",
+          size: "sm",
+          onClick: function onClick() {
+            return _this4.deleteFavMovie(movie._id);
+          }
+        }, "Remove from list")));
+      })))), _react.default.createElement(_Form.default, {
+        className: "registrationForm"
+      }, _react.default.createElement(_Form.default.Group, {
+        controlId: "formBasicUsername"
+      }, _react.default.createElement(_Form.default.Label, null, "Username:"), _react.default.createElement(_Form.default.Control, {
+        type: "text",
+        placeholder: "Username",
+        value: Username,
+        onChange: function onChange(e) {
+          return setUsername(e.target.value);
+        }
+      })), _react.default.createElement(_Form.default.Group, {
+        controlId: "formBasicPassword"
+      }, _react.default.createElement(_Form.default.Label, null, "Password:"), _react.default.createElement(_Form.default.Control, {
+        type: "text",
+        placeholder: "Password",
+        value: Password,
+        onChange: function onChange(e) {
+          return setPassword(e.target.value);
+        }
+      })), _react.default.createElement(_Form.default.Group, {
+        controlId: "formBasicEmail"
+      }, _react.default.createElement(_Form.default.Label, null, "Email address"), _react.default.createElement(_Form.default.Control, {
+        type: "email",
+        placeholder: "Enter email",
+        value: Email,
+        onChange: function onChange(e) {
+          return setEmail(e.target.value);
+        }
+      }), _react.default.createElement(_Form.default.Text, {
+        className: "text-muted"
+      }, "We will never share your information with anyone")), _react.default.createElement(_Form.default.Group, {
+        controlId: "formBasicBirthday"
+      }, _react.default.createElement(_Form.default.Label, null, "Date of Birth"), _react.default.createElement(_Form.default.Control, {
+        type: "date",
+        placeholder: "1985-09-29",
+        value: Birthday,
+        onChange: function onChange(e) {
+          return setBirthday(e.target.value);
+        }
+      })), _react.default.createElement(_Button.default, {
+        variant: "dark"
+      }, "Register me!")));
     }
   }]);
 
