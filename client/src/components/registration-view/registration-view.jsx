@@ -79,7 +79,7 @@ export function RegistrationView(props) {
         </Form.Group>
 
         <Form.Group controlId="formBasicBirthday">
-          <Form.Label>Date of Birth</Form.Label>
+          <Form.Label>Date of birth</Form.Label>
           <Form.Control
             type="date"
             placeholder="1985-09-29"

@@ -39318,7 +39318,7 @@ function RegistrationView(props) {
     className: "text-muted"
   }, "We will never share your information with anyone")), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicBirthday"
-  }, _react.default.createElement(_Form.default.Label, null, "Date of Birth"), _react.default.createElement(_Form.default.Control, {
+  }, _react.default.createElement(_Form.default.Label, null, "Date of birth"), _react.default.createElement(_Form.default.Control, {
     type: "date",
     placeholder: "1985-09-29",
     value: birthday,
@@ -39714,6 +39714,28 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "handleUpdate",
+    value: function handleUpdate() {
+      _axios.default.put("https://myflix-123-db.herokuapp.com/users/".concat(localStorage.getItem('user')), {
+        username: usernameField,
+        password: passwordField,
+        email: emailField,
+        birthday: birthdayField
+      }, {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (response) {
+        var data = response.data;
+        loacalStorage.setItem('user', data.username);
+        window.open("/users/".concat(localStorage.getItem('user')), '_self');
+        console.log(data);
+        alert('Your profile has been updated successfully');
+      }).catch(function (e) {
+        console.log('error updating the user');
+      });
+    }
+  }, {
     key: "deleteFavMovie",
     value: function deleteFavMovie(movieId) {
       var _this3 = this;
@@ -39733,9 +39755,34 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       this.setState;
     }
   }, {
+    key: "deRegister",
+    value: function deRegister() {
+      var _this4 = this;
+
+      _axios.default.delete("https://myflix-123-db.herokuapp.com/users/".concat(localStorage.getItem('user')), {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (response) {
+        alert('User has been successfully deleted!');
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.open('/', '_self');
+
+        _this4.setState({
+          user: null,
+          register: false
+        });
+
+        console.log('user deleted');
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       var _this$state = this.state,
           username = _this$state.username,
@@ -39747,7 +39794,15 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         style: {
           width: '34rem'
         }
-      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, username), _react.default.createElement(_Card.default.Text, null, "Password: ######"), _react.default.createElement(_Card.default.Text, null, "Email: ", email), _react.default.createElement(_Card.default.Text, null, "Birthday: ", birthday)), _react.default.createElement(_Card.default.Footer, null, _react.default.createElement("h4", null, username, "'s favorite movies: "), _react.default.createElement("div", {
+      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Button.default, {
+        type: "button",
+        className: "btn-block",
+        variant: "danger",
+        size: "md",
+        onClick: function onClick() {
+          return _this5.deRegister();
+        }
+      }, "Delete my account"), _react.default.createElement("br", null), _react.default.createElement(_Card.default.Title, null, username), _react.default.createElement(_Card.default.Text, null, "Password: ######"), _react.default.createElement(_Card.default.Text, null, "Email: ", email), _react.default.createElement(_Card.default.Text, null, "Birthday: ", birthday)), _react.default.createElement(_Card.default.Footer, null, _react.default.createElement("h4", null, username, "'s favorite movies: "), _react.default.createElement("div", {
         className: "d-flex"
       }, favorites == 0 && _react.default.createElement("h2", null, " No favorites yet!"), favorites && favorites.map(function (movie) {
         return _react.default.createElement("div", {
@@ -39766,7 +39821,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           variant: "outline-danger",
           size: "sm",
           onClick: function onClick() {
-            return _this4.deleteFavMovie(movie._id);
+            return _this5.deleteFavMovie(movie._id);
           }
         }, "Remove from list")));
       })))), _react.default.createElement(_Form.default, {
@@ -39778,7 +39833,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         placeholder: "Username",
         value: this.state.usernameField,
         onChange: function onChange(e) {
-          return _this4.setUsernameField(e.target.value);
+          return _this5.setUsernameField(e.target.value);
         }
       })), _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicPassword"
@@ -39787,7 +39842,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         placeholder: "Password",
         value: this.state.passwordField,
         onChange: function onChange(e) {
-          return _this4.setPasswordField(e.target.value);
+          return _this5.setPasswordField(e.target.value);
         }
       })), _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicEmail"
@@ -39796,21 +39851,24 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         placeholder: "Enter email",
         value: this.state.emailField,
         onChange: function onChange(e) {
-          return _this4.setEmailField(e.target.value);
+          return _this5.setEmailField(e.target.value);
         }
       }), _react.default.createElement(_Form.default.Text, {
         className: "text-muted"
       }, "We will never share your information with anyone")), _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicBirthday"
-      }, _react.default.createElement(_Form.default.Label, null, "Date of Birth"), _react.default.createElement(_Form.default.Control, {
+      }, _react.default.createElement(_Form.default.Label, null, "Date of birth"), _react.default.createElement(_Form.default.Control, {
         type: "date",
         placeholder: "1985-09-29",
         value: this.state.birthdayField,
         onChange: function onChange(e) {
-          return _this4.setBirthdayField(e.target.value);
+          return _this5.setBirthdayField(e.target.value);
         }
       })), _react.default.createElement(_Button.default, {
-        variant: "info"
+        variant: "info",
+        onClick: function onClick() {
+          return _this5.handleUpdate();
+        }
       }, "Update Profile")));
     }
   }]);

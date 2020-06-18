@@ -92,6 +92,28 @@ export class ProfileView extends React.Component {
 
 
 
+  handleUpdate() {
+    axios.put(`https://myflix-123-db.herokuapp.com/users/${localStorage.getItem('user')}`, {
+      username: usernameField,
+      password: passwordField,
+      email: emailField,
+      birthday: birthdayField
+    }, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    })
+      .then(response => {
+        const data = response.data;
+        loacalStorage.setItem('user', data.username);
+        window.open(`/users/${localStorage.getItem('user')}`, '_self');
+        console.log(data);
+        alert('Your profile has been updated successfully')
+
+      })
+      .catch(e => {
+        console.log('error updating the user')
+      });
+  };
+
   deleteFavMovie(movieId) {
     axios
       .delete(`https://myflix-123-db.herokuapp.com/users/${localStorage.getItem('user')}/favorites/${movieId}`, {
@@ -108,7 +130,25 @@ export class ProfileView extends React.Component {
     this.setState;
   }
 
-
+  deRegister() {
+    axios.delete(`https://myflix-123-db.herokuapp.com/users/${localStorage.getItem('user')}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    })
+      .then(response => {
+        alert('User has been successfully deleted!')
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.open('/', '_self');
+        this.setState({
+          user: null,
+          register: false
+        });
+        console.log('user deleted')
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
 
 
@@ -122,6 +162,8 @@ export class ProfileView extends React.Component {
       <div>
         <Card className="Profile-Card" style={{ width: '34rem' }}>
           <Card.Body>
+            <Button type="button" className="btn-block" variant="danger" size="md" onClick={() => this.deRegister()}>Delete my account</Button>
+            <br></br>
             <Card.Title>{username}</Card.Title>
             <Card.Text>Password: ######</Card.Text>
             <Card.Text>Email: {email}</Card.Text>
@@ -187,7 +229,7 @@ export class ProfileView extends React.Component {
           </Form.Group>
 
           <Form.Group controlId="formBasicBirthday">
-            <Form.Label>Date of Birth</Form.Label>
+            <Form.Label>Date of birth</Form.Label>
             <Form.Control
               type="date"
               placeholder="1985-09-29"
@@ -196,14 +238,10 @@ export class ProfileView extends React.Component {
             />
           </Form.Group>
 
-          <Button variant="info">Update Profile</Button>
+          <Button variant="info" onClick={() => this.handleUpdate()}>Update Profile</Button>
 
 
         </Form>
-
-
-
-
       </div>
     )
   }
