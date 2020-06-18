@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 
 import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 
@@ -156,13 +155,13 @@ export class MainView extends React.Component {
               <Route path="/genres/:name" render={({ match }) => {
                 if (movies.length == 0)
                   return <div className="main-view" />
-                return <GenreView genre={movies.find(m => m.genre.name === match.params.name).genre} />
+                return <GenreView genre={movies.find(m => m.genre.name === match.params.name).genre} movies={movies} />
               }} />
 
               <Route path="/directors/:name" render={({ match }) => {
                 if (movies.length == 0)
                   return <div className="main-view" />;
-                return <DirectorView director={movies.find(m => m.director.name === match.params.name).director} />
+                return <DirectorView director={movies.find(m => m.director.name === match.params.name).director} movies={movies} />
               }} />
 
               <Route path="/users/:username" render={() => {

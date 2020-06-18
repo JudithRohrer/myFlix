@@ -18,6 +18,7 @@ export function RegistrationView(props) {
   const handleRegistration = (e) => {
     e.preventDefault();
 
+
     if (!username || !password || !email || !birthday) {
       return alert("Please fill out all asked information")
     } else {
@@ -36,7 +37,6 @@ export function RegistrationView(props) {
           console.log('error registering the user')
         });
     };
-
   }
 
 

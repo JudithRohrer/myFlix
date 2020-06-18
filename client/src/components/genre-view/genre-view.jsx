@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
-import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import Card, { CardTitle } from 'react-bootstrap/Card';
+import Card from 'react-bootstrap/Card';
 
 
 
@@ -21,22 +19,40 @@ export class GenreView extends React.Component {
   }
 
   render() {
-    const { genre } = this.props;
+    const { genre, movies } = this.props;
 
     if (!genre) return null;
 
     return (
-      <Container className="genre-view">
-        <Card className="cardBody" style={{ width: '20rem' }}>
-          <Card.Body>
-            <Card.Title>{genre.name}</Card.Title>
-            <Card.Text>{genre.description}</Card.Text>
-
-            <Link to={`/`}>
-              <Button variant="light">Close</Button>
-            </Link>
-          </Card.Body>
-        </Card>
+      <Container>
+        <div className="genre-view">
+          <Card className="cardBody" style={{ width: '30rem' }}>
+            <Card.Body>
+              <Card.Title>{genre.name}</Card.Title>
+              <Card.Text>{genre.description}</Card.Text>
+              <Card.Text> Movies from this genre:
+              </Card.Text>
+              <div className="d-flex row mt-3 ml-1">
+                {movies.map(movie => {
+                  if (movie.genre.name === genre.name) {
+                    return (
+                      <div key={movie._id}>
+                        <Card className="genre-view-card box-shadow" style={{ width: "10rem" }}>
+                          <Link to={`/movies/${movie._id}`}>
+                            <Card.Img variant="top" src={movie.imagePath} />
+                          </Link>
+                        </Card>
+                      </div>
+                    );
+                  }
+                })}
+              </div>
+              <Link to={`/`}>
+                <Button variant="light">Close</Button>
+              </Link>
+            </Card.Body>
+          </Card>
+        </div>
       </Container>
     );
 

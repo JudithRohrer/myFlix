@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
@@ -94,16 +92,16 @@ export class ProfileView extends React.Component {
 
   handleUpdate() {
     axios.put(`https://myflix-123-db.herokuapp.com/users/${localStorage.getItem('user')}`, {
-      username: usernameField,
-      password: passwordField,
-      email: emailField,
-      birthday: birthdayField
+      username: this.state.usernameField,
+      password: this.state.passwordField,
+      email: this.state.emailField,
+      birthday: this.state.birthdayField
     }, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     })
       .then(response => {
         const data = response.data;
-        loacalStorage.setItem('user', data.username);
+        localStorage.setItem('user', data.username);
         window.open(`/users/${localStorage.getItem('user')}`, '_self');
         console.log(data);
         alert('Your profile has been updated successfully')
@@ -247,3 +245,11 @@ export class ProfileView extends React.Component {
   }
 }
 
+ProfileView.propTypes = {
+  handleUpdate: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    birthday: PropTypes.string.isRequired
+  })
+}
