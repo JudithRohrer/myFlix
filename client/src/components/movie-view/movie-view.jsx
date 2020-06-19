@@ -23,28 +23,28 @@ export class MovieView extends React.Component {
     if (!movie) return null;
 
     return (
-      <div className="FormMovie">
-        <Card style={{ width: '28rem' }}>
-          <Card.Img variant="top" src={movie.imagePath} />
-          <Card.Body>
-            <Card.Title>{movie.title}</Card.Title>
-            <Card.Text>Description: {movie.description}</Card.Text>
-            <Card.Text>Genre:
+
+      <Card >
+        <Card.Img variant="top" src={movie.imagePath} />
+        <Card.Body>
+          <Card.Title>{movie.title}</Card.Title>
+          <Card.Text>Description: {movie.description}</Card.Text>
+          <Card.Text>Genre:
             <Link to={`/genres/${movie.genre.name}`}>
-                <Button variant="link">{movie.genre.name}</Button>
-              </Link>
-            </Card.Text>
-            <Card.Text>Director:
-            <Link to={`/directors/${movie.director.name}`}>
-                <Button variant="link">{movie.director.name}</Button>
-              </Link>
-            </Card.Text>
-            <Link to={`/`}>
-              <Button variant="light">Back</Button>
+              <Button variant="link">{movie.genre.name}</Button>
             </Link>
-          </Card.Body>
-        </Card>
-      </div>
+          </Card.Text>
+          <Card.Text>Director:
+            <Link to={`/directors/${movie.director.name}`}>
+              <Button variant="link">{movie.director.name}</Button>
+            </Link>
+          </Card.Text>
+          <Link to={`/`}>
+            <Button variant="light">Back</Button>
+          </Link>
+        </Card.Body>
+      </Card>
+
     );
   }
 }

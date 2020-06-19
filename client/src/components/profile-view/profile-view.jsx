@@ -158,7 +158,7 @@ export class ProfileView extends React.Component {
 
     return (
       <div>
-        <Card className="Profile-Card" style={{ width: '34rem' }}>
+        <Card className="Profile-Card" >
           <Card.Body>
             <Button type="button" className="btn-block" variant="danger" size="md" onClick={() => this.deRegister()}>Delete my account</Button>
             <br></br>
@@ -172,22 +172,22 @@ export class ProfileView extends React.Component {
 
             <h4>{username}'s favorite movies: </h4>
 
-            <div className="d-flex">
-              {favorites == 0 && <h2> No favorites yet!</h2>}
-              {favorites &&
-                favorites.map(movie => {
-                  return (
-                    <div key={movie._id}>
-                      <Card className="profile-view-card box-shadow" style={{ width: "10rem" }}>
-                        <Link to={`/movies/${movie._id}`}>
-                          <Card.Img variant="top" src={movie.imagePath} />
-                        </Link>
-                        <Button variant="outline-danger" size="sm" onClick={() => this.deleteFavMovie(movie._id)}>Remove from list</Button>
-                      </Card>
-                    </div>
-                  );
-                })}
-            </div>
+
+            {favorites == 0 && <h2> No favorites yet!</h2>}
+            {favorites &&
+              favorites.map(movie => {
+                return (
+
+                  <Card className="profile-view-card box-shadow" key={movie._id} >
+                    <Link to={`/movies/${movie._id}`}>
+                      <Card.Img variant="top" src={movie.imagePath} />
+                    </Link>
+                    <Button variant="outline-danger" size="sm" onClick={() => this.deleteFavMovie(movie._id)}>Remove from list</Button>
+                  </Card>
+
+                );
+              })}
+
           </Card.Footer>
         </Card>
 

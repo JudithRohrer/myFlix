@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
+
 import Button from 'react-bootstrap/Button';
 
 
@@ -41,7 +41,7 @@ export function RegistrationView(props) {
 
 
   return (
-    <Container className="registrationContainer">
+    <div>
       <h1>Welcome to myFlix</h1>
       <h4>Come and join our wonderfull world of movies!</h4>
       <Form className="registrationForm">
@@ -75,7 +75,7 @@ export function RegistrationView(props) {
           />
           <Form.Text className="text-muted">
             We will never share your information with anyone
-          </Form.Text>
+            </Form.Text>
         </Form.Group>
 
         <Form.Group controlId="formBasicBirthday">
@@ -93,7 +93,7 @@ export function RegistrationView(props) {
         <Button variant="link" onClick={(user) => props.onMemberClicked()}>Already a member?</Button>
 
       </Form>
-    </Container>
+    </div>
   );
 }
 
