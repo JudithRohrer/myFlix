@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 import './movie-view.scss';
@@ -23,27 +26,28 @@ export class MovieView extends React.Component {
     if (!movie) return null;
 
     return (
-
-      <Card >
-        <Card.Img variant="top" src={movie.imagePath} />
-        <Card.Body>
-          <Card.Title>{movie.title}</Card.Title>
-          <Card.Text>Description: {movie.description}</Card.Text>
-          <Card.Text>Genre:
+      <Col>
+        <Card >
+          <Card.Img variant="top" src={movie.imagePath} />
+          <Card.Body>
+            <Card.Title>{movie.title}</Card.Title>
+            <Card.Text>Description: {movie.description}</Card.Text>
+            <Card.Text>Genre:
             <Link to={`/genres/${movie.genre.name}`}>
-              <Button variant="link">{movie.genre.name}</Button>
-            </Link>
-          </Card.Text>
-          <Card.Text>Director:
+                <Button variant="link">{movie.genre.name}</Button>
+              </Link>
+            </Card.Text>
+            <Card.Text>Director:
             <Link to={`/directors/${movie.director.name}`}>
-              <Button variant="link">{movie.director.name}</Button>
+                <Button variant="link">{movie.director.name}</Button>
+              </Link>
+            </Card.Text>
+            <Link to={`/`}>
+              <Button variant="light">Back</Button>
             </Link>
-          </Card.Text>
-          <Link to={`/`}>
-            <Button variant="light">Back</Button>
-          </Link>
-        </Card.Body>
-      </Card>
+          </Card.Body>
+        </Card>
+      </Col>
 
     );
   }

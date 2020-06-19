@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 
@@ -29,34 +32,35 @@ export class DirectorView extends React.Component {
 
     return (
 
-
-      <Card className="cardBody" >
-        <Card.Body>
-          <Card.Title>{director.name}</Card.Title>
-          <Card.Text>{director.bio}</Card.Text>
-          <Card.Text>Birth Year: {director.birth}</Card.Text>
-          <Card.Text> Movies from this director:
+      <Col>
+        <Card className="cardBody" >
+          <Card.Body>
+            <Card.Title>{director.name}</Card.Title>
+            <Card.Text>{director.bio}</Card.Text>
+            <Card.Text>Birth Year: {director.birth}</Card.Text>
+            <Card.Text> Movies from this director:
               </Card.Text>
-          <div >
-            {movies.map(movie => {
-              if (movie.director.name === director.name) {
-                return (
+            <div >
+              {movies.map(movie => {
+                if (movie.director.name === director.name) {
+                  return (
 
-                  <Card className="director-view-card box-shadow" key={movie._id} >
-                    <Link to={`/movies/${movie._id}`}>
-                      <Card.Img variant="top" src={movie.imagePath} />
-                    </Link>
-                  </Card>
+                    <Card className="director-view-card box-shadow" key={movie._id} >
+                      <Link to={`/movies/${movie._id}`}>
+                        <Card.Img variant="top" src={movie.imagePath} />
+                      </Link>
+                    </Card>
 
-                );
-              }
-            })}
-          </div>
-          <Link to={`/`}>
-            <Button variant="light">Close</Button>
-          </Link>
-        </Card.Body>
-      </Card>
+                  );
+                }
+              })}
+            </div>
+            <Link to={`/`}>
+              <Button variant="light">Close</Button>
+            </Link>
+          </Card.Body>
+        </Card>
+      </Col>
 
 
     );

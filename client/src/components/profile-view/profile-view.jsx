@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import { Link } from "react-router-dom";
 
@@ -157,90 +160,93 @@ export class ProfileView extends React.Component {
 
 
     return (
-      <div>
-        <Card className="Profile-Card" >
-          <Card.Body>
-            <Button type="button" className="btn-block" variant="danger" size="md" onClick={() => this.deRegister()}>Delete my account</Button>
-            <br></br>
-            <Card.Title>{username}</Card.Title>
-            <Card.Text>Password: ######</Card.Text>
-            <Card.Text>Email: {email}</Card.Text>
-            <Card.Text>Birthday: {birthday}</Card.Text>
 
-          </Card.Body>
-          <Card.Footer>
+      <Col>
+        <div>
+          <Card className="Profile-Card" >
+            <Card.Body>
+              <Button type="button" className="btn-block" variant="danger" size="md" onClick={() => this.deRegister()}>Delete my account</Button>
+              <br></br>
+              <Card.Title>{username}</Card.Title>
+              <Card.Text>Password: ######</Card.Text>
+              <Card.Text>Email: {email}</Card.Text>
+              <Card.Text>Birthday: {birthday}</Card.Text>
 
-            <h4>{username}'s favorite movies: </h4>
+            </Card.Body>
+            <Card.Footer>
+
+              <h4>{username}'s favorite movies: </h4>
 
 
-            {favorites == 0 && <h2> No favorites yet!</h2>}
-            {favorites &&
-              favorites.map(movie => {
-                return (
+              {favorites == 0 && <h2> No favorites yet!</h2>}
+              {favorites &&
+                favorites.map(movie => {
+                  return (
 
-                  <Card className="profile-view-card box-shadow" key={movie._id} >
-                    <Link to={`/movies/${movie._id}`}>
-                      <Card.Img variant="top" src={movie.imagePath} />
-                    </Link>
-                    <Button variant="outline-danger" size="sm" onClick={() => this.deleteFavMovie(movie._id)}>Remove from list</Button>
-                  </Card>
+                    <Card className="profile-view-card box-shadow" key={movie._id} >
+                      <Link to={`/movies/${movie._id}`}>
+                        <Card.Img variant="top" src={movie.imagePath} />
+                      </Link>
+                      <Button variant="outline-danger" size="sm" onClick={() => this.deleteFavMovie(movie._id)}>Remove from list</Button>
+                    </Card>
 
-                );
-              })}
+                  );
+                })}
 
-          </Card.Footer>
-        </Card>
+            </Card.Footer>
+          </Card>
 
-        <Form className="registrationForm">
-          <Form.Group controlId="formBasicUsername">
-            <h3>Need to update your user information?</h3>
-            <Form.Label>Username:</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Username"
-              value={this.state.usernameField}
-              onChange={e => this.setUsernameField(e.target.value)}
-            />
-          </Form.Group>
+          <Form className="registrationForm">
+            <Form.Group controlId="formBasicUsername">
+              <h3>Need to update your user information?</h3>
+              <Form.Label>Username:</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Username"
+                value={this.state.usernameField}
+                onChange={e => this.setUsernameField(e.target.value)}
+              />
+            </Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password:</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Password"
-              value={this.state.passwordField}
-              onChange={e => this.setPasswordField(e.target.value)}
-            />
-          </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Password"
+                value={this.state.passwordField}
+                onChange={e => this.setPasswordField(e.target.value)}
+              />
+            </Form.Group>
 
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={this.state.emailField}
-              onChange={e => this.setEmailField(e.target.value)}
-            />
-            <Form.Text className="text-muted">
-              We will never share your information with anyone
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                value={this.state.emailField}
+                onChange={e => this.setEmailField(e.target.value)}
+              />
+              <Form.Text className="text-muted">
+                We will never share your information with anyone
           </Form.Text>
-          </Form.Group>
+            </Form.Group>
 
-          <Form.Group controlId="formBasicBirthday">
-            <Form.Label>Date of birth</Form.Label>
-            <Form.Control
-              type="date"
-              placeholder="1985-09-29"
-              value={this.state.birthdayField}
-              onChange={e => this.setBirthdayField(e.target.value)}
-            />
-          </Form.Group>
+            <Form.Group controlId="formBasicBirthday">
+              <Form.Label>Date of birth</Form.Label>
+              <Form.Control
+                type="date"
+                placeholder="1985-09-29"
+                value={this.state.birthdayField}
+                onChange={e => this.setBirthdayField(e.target.value)}
+              />
+            </Form.Group>
 
-          <Button variant="info" onClick={() => this.handleUpdate()}>Update Profile</Button>
+            <Button variant="info" onClick={() => this.handleUpdate()}>Update Profile</Button>
 
 
-        </Form>
-      </div>
+          </Form>
+        </div>
+      </Col>
     )
   }
 }
