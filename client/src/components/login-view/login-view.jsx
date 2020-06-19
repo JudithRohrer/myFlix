@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import axios from 'axios';
 
@@ -33,44 +36,49 @@ export function LoginView(props) {
 
 
   return (
+    <Container>
+      <Row>
+        <Col>
+          <Form>
+            <Form.Group controlId="formBasicUsername">
+              <Form.Label>Username:</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Username"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+              />
+            </Form.Group>
 
-    <Form>
-      <Form.Group controlId="formBasicUsername">
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter Username"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-        />
-      </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </Form.Group>
 
-      <Form.Group controlId="formBasicPassword">
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
-      </Form.Group>
-
-      <Button
-        className="button-main"
-        variant="dark"
-        type="submit"
-        onClick={handleSubmit}
-      >Sign In
+            <Button
+              className="button-main"
+              variant="dark"
+              type="submit"
+              onClick={handleSubmit}
+            >Sign In
         </Button>
 
-      <Button
-        className="register-button"
-        variant="link"
-        onClick={onRegLinkClick}
-      >Or register now!
+            <Button
+              className="register-button"
+              variant="link"
+              onClick={onRegLinkClick}
+            >Or register now!
         </Button>
 
-    </Form>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
 
   );
 }
