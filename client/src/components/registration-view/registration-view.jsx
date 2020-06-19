@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import axios from 'axios';
+
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -8,7 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import './registration-view.scss';
-import axios from 'axios';
+
 
 export function RegistrationView(props) {
   const [username, createUsername] = useState('');
@@ -103,11 +104,4 @@ export function RegistrationView(props) {
 }
 
 
-RegistrationView.propTypes = {
-  handleRegistration: PropTypes.shape({
-    //onRegistration: PropTypes.func.isRequired,
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired
-  })
-}
+

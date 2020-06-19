@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
@@ -44,12 +42,13 @@ export class DirectorView extends React.Component {
               {movies.map(movie => {
                 if (movie.director.name === director.name) {
                   return (
-
-                    <Card className="director-view-card box-shadow" key={movie._id} >
-                      <Link to={`/movies/${movie._id}`}>
-                        <Card.Img variant="top" src={movie.imagePath} />
-                      </Link>
-                    </Card>
+                    <Col lg={4} key={movie._id}>
+                      <Card className="director-view-card box-shadow">
+                        <Link to={`/movies/${movie._id}`}>
+                          <Card.Img variant="top" src={movie.imagePath} />
+                        </Link>
+                      </Card>
+                    </Col>
 
                   );
                 }
@@ -72,5 +71,8 @@ DirectorView.propTypes = {
     name: PropTypes.string.isRequired,
     bio: PropTypes.string.isRequired,
     birth: PropTypes.string.isRequired
-  })
+  }).isRequired,
+  movie: PropTypes.shape({
+    imagePath: PropTypes.string.isRequired
+  }).isRequired
 };

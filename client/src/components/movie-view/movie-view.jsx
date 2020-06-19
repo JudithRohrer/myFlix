@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom'
 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
@@ -58,16 +56,11 @@ MovieView.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     genre: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired
+      name: PropTypes.string.isRequired
     }),
     director: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      bio: PropTypes.string.isRequired,
-      birth: PropTypes.string.isRequired
+      name: PropTypes.string.isRequired
     }),
-    imagePath: PropTypes.string.isRequired,
-    featured: PropTypes.bool.isRequired
-  }).isRequired,
-  //onResetSelectedMovie: PropTypes.func.isRequired
+    imagePath: PropTypes.string.isRequired
+  }).isRequired
 };

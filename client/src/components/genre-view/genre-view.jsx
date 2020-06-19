@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
@@ -39,13 +37,13 @@ export class GenreView extends React.Component {
               {movies.map(movie => {
                 if (movie.genre.name === genre.name) {
                   return (
-
-                    <Card className="genre-view-card box-shadow" key={movie._id}>
-                      <Link to={`/movies/${movie._id}`}>
-                        <Card.Img variant="top" src={movie.imagePath} />
-                      </Link>
-                    </Card>
-
+                    <Col sm={4} key={movie._id}>
+                      <Card className="genre-view-card box-shadow" key={movie._id}>
+                        <Link to={`/movies/${movie._id}`}>
+                          <Card.Img variant="top" src={movie.imagePath} />
+                        </Link>
+                      </Card>
+                    </Col>
                   );
                 }
               })}
@@ -64,8 +62,11 @@ export class GenreView extends React.Component {
 }
 
 GenreView.propTypes = {
-  gerne: PropTypes.shape({
+  genre: PropTypes.shape({
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired
-  })
+  }).isRequired,
+  movie: PropTypes.shape({
+    imagePath: PropTypes.string.isRequired
+  }).isRequired
 };
