@@ -40033,7 +40033,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           return _this3.onSignUpClick();
         }
       });
-      return _react.default.createElement(_Container.default, null, _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Link, {
+      return _react.default.createElement(_Container.default, null, _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement(_reactRouterDom.Link, {
         to: '/users/${user}'
       }, _react.default.createElement(_Button.default, {
         className: "Profile-button",
@@ -40045,7 +40045,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         onClick: function onClick() {
           return _this3.onLoggedOut();
         }
-      }, "Logout")), _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {
+      }, "Logout"))), _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: "/",
         render: function render() {

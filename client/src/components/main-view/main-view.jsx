@@ -121,20 +121,23 @@ export class MainView extends React.Component {
       <Container>
         <Router>
           <Row>
-            <Link to={'/users/${user}'}>
-              <Button
-                className="Profile-button"
-                variant="info"
-              >Your profile
-          </Button>
-            </Link>
+            <Col>
+              <Link to={'/users/${user}'}>
+                <Button
+                  className="Profile-button"
+                  variant="info"
+                >Your profile
+                </Button>
+              </Link>
 
-            <Button
-              className="Logout-button"
-              variant="dark"
-              type="submit"
-              onClick={() => this.onLoggedOut()}>Logout
-          </Button>
+
+              <Button
+                className="Logout-button"
+                variant="dark"
+                type="submit"
+                onClick={() => this.onLoggedOut()}>Logout
+                </Button>
+            </Col>
           </Row>
 
 
