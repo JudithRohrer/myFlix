@@ -75,7 +75,7 @@ DirectorView.propTypes = {
     bio: PropTypes.string.isRequired,
     birth: PropTypes.string.isRequired
   }).isRequired,
-  movies: PropTypes.shape({
+  movies: PropTypes.arrayOf(PropTypes.shape({
     imagePath: PropTypes.string.isRequired
-  }).isRequired
+  })).isRequired
 };
