@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
@@ -31,29 +33,30 @@ export class DirectorView extends React.Component {
     return (
 
       <Col>
-        <Card className="cardBody" >
+        <Card className="cardBody" style={{ width: "20rem" }}>
           <Card.Body>
             <Card.Title>{director.name}</Card.Title>
             <Card.Text>{director.bio}</Card.Text>
             <Card.Text>Birth Year: {director.birth}</Card.Text>
             <Card.Text> Movies from this director:
-              </Card.Text>
-            <div >
-              {movies.map(movie => {
-                if (movie.director.name === director.name) {
-                  return (
-                    <Col lg={4} key={movie._id}>
-                      <Card className="director-view-card box-shadow">
-                        <Link to={`/movies/${movie._id}`}>
-                          <Card.Img variant="top" src={movie.imagePath} />
-                        </Link>
-                      </Card>
-                    </Col>
-
-                  );
-                }
-              })}
-            </div>
+            </Card.Text>
+            <Container>
+              <Row>
+                {movies.map(movie => {
+                  if (movie.director.name === director.name) {
+                    return (
+                      <Col sm={6} key={movie._id}>
+                        <Card className="director-view-card box-shadow">
+                          <Link to={`/movies/${movie._id}`}>
+                            <Card.Img variant="top" src={movie.imagePath} />
+                          </Link>
+                        </Card>
+                      </Col>
+                    );
+                  }
+                })}
+              </Row>
+            </Container>
             <Link to={`/`}>
               <Button variant="light">Close</Button>
             </Link>
@@ -72,7 +75,7 @@ DirectorView.propTypes = {
     bio: PropTypes.string.isRequired,
     birth: PropTypes.string.isRequired
   }).isRequired,
-  movie: PropTypes.shape({
+  movies: PropTypes.shape({
     imagePath: PropTypes.string.isRequired
   }).isRequired
 };

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+
 
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import { Link } from "react-router-dom";
@@ -176,20 +178,33 @@ export class ProfileView extends React.Component {
           </Card.Body>
           <Card.Footer>
             <h4>{username}'s favorite movies: </h4>
-            {favorites == 0 && <h2> No favorites yet!</h2>}
-            {favorites &&
-              favorites.map(movie => {
-                return (
-                  <Card className="profile-view-card box-shadow" key={movie._id} >
-                    <Link to={`/movies/${movie._id}`}>
-                      <Card.Img variant="top" src={movie.imagePath} />
-                    </Link>
-                    <Button variant="outline-danger" size="sm" onClick={() => this.deleteFavMovie(movie._id)}>Remove from list</Button>
-                  </Card>
-                );
-              })}
+            <Container>
+              <Row>
+                {favorites == 0 && <h2> No favorites yet!</h2>}
+                {favorites &&
+                  favorites.map(movie => {
+                    return (
+                      <Col lg={2} key={movie._id}>
+                        <Card className="profile-view-card" style={{ width: "10rem" }}>
+                          <Link to={`/movies/${movie._id}`}>
+                            <Card.Img variant="top" src={movie.imagePath} />
+                          </Link>
+                          <Button variant="outline-danger" size="sm" onClick={() => this.deleteFavMovie(movie._id)}>Remove from list</Button>
+                        </Card>
+                      </Col>
+                    );
+                  })}
+              </Row>
+            </Container>
+            <br></br>
+            <Link to={`/`}>
+              <Button variant="dark">Back</Button>
+            </Link>
           </Card.Footer>
         </Card>
+
+        <br></br>
+        <br></br>
 
         <Form className="registrationForm">
           <Form.Group controlId="formBasicUsername">

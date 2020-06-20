@@ -122,7 +122,7 @@ export class MainView extends React.Component {
         <Router>
           <Row>
             <Col>
-              <Link to={'/users/${user}'}>
+              <Link to={`/users/${user}`}>
                 <Button
                   className="Profile-button"
                   variant="info"
