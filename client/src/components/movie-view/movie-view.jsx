@@ -25,7 +25,7 @@ export class MovieView extends React.Component {
 
     return (
       <Col>
-        <Card style={{ width: "20rem" }}>
+        <Card style={{ maxWidth: "20rem", margin: "0 auto" }}>
           <Card.Img variant="top" src={movie.imagePath} />
           <Card.Body>
             <Card.Title>{movie.title}</Card.Title>

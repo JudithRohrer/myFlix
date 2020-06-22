@@ -185,7 +185,7 @@ export class ProfileView extends React.Component {
                   favorites.map(movie => {
                     return (
                       <Col lg={2} key={movie._id}>
-                        <Card className="profile-view-card" style={{ width: "10rem" }}>
+                        <Card className="profile-view-card" style={{ maxWidth: "10rem", margin: "0 auto" }}>
                           <Link to={`/movies/${movie._id}`}>
                             <Card.Img variant="top" src={movie.imagePath} />
                           </Link>

@@ -206,6 +206,25 @@
           <td>JWT Strategy</td>
         </tr>
         <tr>
+          <th scope="row">Get information from a certain user</th>
+          <td>/users/[username]</td>
+          <td>GET</td>
+          <td>none</td>
+          <td>JSON object holding data of the user<br> Example:<br>
+            {<br>
+            favorites:[<br>
+            "8859947",<br>
+            ],<br>
+            _id: "5",<br>
+            username: ”Hans”,<br>
+            password: ”Password123”,<br>
+            email: ”mail@gmail.com”,<br>
+            birthday: ”1989-09-30T00:00:00.00Z”
+            }
+          </td>
+          <td>JWT Strategy</td>
+        </tr>
+        <tr>
           <th scope="row">Remove a user from the the registry</th>
           <td>/users/[username]</td>
           <td>DELETE</td>

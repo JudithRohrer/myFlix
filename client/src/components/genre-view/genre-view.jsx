@@ -29,7 +29,7 @@ export class GenreView extends React.Component {
     return (
 
       <Col>
-        <Card className="cardBody" style={{ width: "20rem" }}>
+        <Card className="cardBody" style={{ maxWidth: "20rem", margin: "0 auto" }}>
           <Card.Body>
             <Card.Title>{genre.name}</Card.Title>
             <Card.Text>{genre.description}</Card.Text>

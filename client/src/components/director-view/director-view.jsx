@@ -33,7 +33,7 @@ export class DirectorView extends React.Component {
     return (
 
       <Col>
-        <Card className="cardBody" style={{ width: "20rem" }}>
+        <Card className="cardBody" style={{ maxWidth: "20rem", margin: "0 auto" }}>
           <Card.Body>
             <Card.Title>{director.name}</Card.Title>
             <Card.Text>{director.bio}</Card.Text>

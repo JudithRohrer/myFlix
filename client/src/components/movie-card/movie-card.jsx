@@ -14,7 +14,7 @@ export class MovieCard extends React.Component {
 
     return (
       <Col md={6} lg={4}>
-        <Card className="cardBody box-shadow" style={{ width: "16rem" }} >
+        <Card className="cardBody box-shadow" style={{ maxWidth: "16rem", margin: "0 auto" }} >
           <Card.Img className="cardImage" variant="top" src={movie.imagePath} />
           <Card.Body>
             <Card.Title>{movie.title}</Card.Title>
