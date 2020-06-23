@@ -17,7 +17,6 @@ import './main-view.scss';
 
 import MoviesList from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
-import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
@@ -30,8 +29,7 @@ export class MainView extends React.Component {
     super();
 
     this.state = {
-      user: null,
-      register: false
+      user: null
     };
   }
 
@@ -58,11 +56,7 @@ export class MainView extends React.Component {
   }
 
 
-  onSignUpClick() {
-    this.setState({
-      register: false
-    })
-  }
+
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
@@ -84,21 +78,16 @@ export class MainView extends React.Component {
     localStorage.removeItem('user');
   }
 
-  onMemberClicked() {
-    this.setState({
-      user: null,
-      register: true
-    })
-  }
+
 
   render() {
-    const { movies } = this.props;
-    const { user, register } = this.state;
-
-    if (!register && !user) return <RegistrationView onMemberClicked={() => this.onMemberClicked()} />;
+    let { movies } = this.props;
+    let { user } = this.state;
 
 
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onSignUpClick={() => this.onSignUpClick()} />;
+
+
+
 
 
     return (
@@ -127,9 +116,13 @@ export class MainView extends React.Component {
 
           <Row>
             <Route exact path="/" render={() => {
-              return <MoviesList movies={movies} //movies.map(m => <MovieCard key={m._id} movie={m} />)}
-              />
+              if (!user) return (
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />);
+              return <MoviesList movies={movies}
+              />;
             }} />
+
+            <Route path="/register" render={() => <RegistrationView />} />
 
             <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
 

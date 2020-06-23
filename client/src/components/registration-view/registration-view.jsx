@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -94,8 +93,6 @@ export function RegistrationView(props) {
 
             <Button variant="dark" onClick={handleRegistration}>Register me!</Button>
 
-            <Button variant="link" onClick={(user) => props.onMemberClicked()}>Already a member?</Button>
-
           </Form>
         </Col>
       </Row>
@@ -103,7 +100,5 @@ export function RegistrationView(props) {
   );
 }
 
-RegistrationView.propTypes = {
-  onMemberClicked: PropTypes.func.isRequired
-};
+
 

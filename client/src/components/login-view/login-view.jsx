@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -29,16 +30,15 @@ export function LoginView(props) {
       });
   }
 
-  const onRegLinkClick = (e) => {
-    e.preventDefault();
-    props.onSignUpClick()
-  }
+
+
 
 
   return (
     <Container>
       <Row>
         <Col>
+          <h1>Log in</h1><br />
           <Form>
             <Form.Group controlId="formBasicUsername">
               <Form.Label>Username:</Form.Label>
@@ -68,12 +68,9 @@ export function LoginView(props) {
             >Sign In
         </Button>
 
-            <Button
-              className="register-button"
-              variant="link"
-              onClick={onRegLinkClick}
-            >Or register now!
-        </Button>
+            <Link to={`/register`}>
+              <Button>Or register now!</Button>
+            </Link>
 
           </Form>
         </Col>
@@ -84,8 +81,5 @@ export function LoginView(props) {
 }
 
 LoginView.propTypes = {
-  onLoggedIn: PropTypes.func.isRequired,
-  onSignUpClick: PropTypes.func.isRequired
+  onLoggedIn: PropTypes.func.isRequired
 }
-
-
