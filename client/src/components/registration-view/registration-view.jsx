@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -92,6 +93,9 @@ export function RegistrationView(props) {
             </Form.Group>
 
             <Button variant="dark" onClick={handleRegistration}>Register me!</Button>
+            <Link to={`/`}>
+              <Button variant="link">Log in</Button>
+            </Link>
 
           </Form>
         </Col>

@@ -69,7 +69,7 @@ export function LoginView(props) {
         </Button>
 
             <Link to={`/register`}>
-              <Button>Or register now!</Button>
+              <Button variant="link">Or register now!</Button>
             </Link>
 
           </Form>

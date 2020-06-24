@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
+
+import { setMovies, setUser } from '../../actions/actions';
 
 
 import Button from 'react-bootstrap/Button';
@@ -10,6 +12,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import { Link } from "react-router-dom";
+
+import { connect } from 'react-redux';
 
 
 
@@ -261,3 +265,9 @@ export class ProfileView extends React.Component {
   }
 }
 
+
+let mapStateToProps = state => {
+  return { movies: state.movies, user: state.user }
+};
+
+export default connect(mapStateToProps, { setMovies, setUser })(ProfileView);

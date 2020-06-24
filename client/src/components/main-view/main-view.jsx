@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import { setMovies } from '../../actions/actions';
+import { setUser } from '../../actions/actions';
 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -70,8 +71,7 @@ export class MainView extends React.Component {
 
   onLoggedOut() {
     this.setState({
-      user: null,
-      register: true
+      user: null
     })
 
     localStorage.removeItem('token');
@@ -86,13 +86,15 @@ export class MainView extends React.Component {
 
 
 
-
+    if (!movies) return <div className="main-view" />;
 
 
 
     return (
       <Container>
         <Router>
+
+
           <Row>
             <Col>
               <Link to={`/users/${user}`}>
@@ -154,7 +156,7 @@ export class MainView extends React.Component {
 }
 
 let mapStateToProps = state => {
-  return { movies: state.movies }
+  return { movies: state.movies, user: state.user }
 }
 
-export default connect(mapStateToProps, { setMovies })(MainView);
+export default connect(mapStateToProps, { setMovies, setUser })(MainView);
