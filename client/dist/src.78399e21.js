@@ -43748,8 +43748,9 @@ function LoginView(props) {
       password: password
     }).then(function (response) {
       var data = response.data;
+      console.log(data);
       localStorage.setItem('token', data.token);
-      localStorage.setItem('user', data.username);
+      localStorage.setItem('user', data.user.username);
       props.setUser(data.user.username);
       props.getMovies(data.token);
     }).catch(function (e) {
@@ -44721,9 +44722,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       var accessToken = localStorage.getItem('token');
 
       if (accessToken !== null) {
-        this.setState({
-          user: localStorage.getItem('user')
-        });
+        this.props.setUser(localStorage.getItem('user'));
         this.getMovies(accessToken);
       }
     }
@@ -44742,17 +44741,16 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         console.log(error);
       });
     }
-  }, {
-    key: "onLoggedIn",
-    value: function onLoggedIn(authData) {
-      console.log(authData);
-      this.setState({
-        user: authData.user.username
-      });
-      localStorage.setItem('token', authData.token);
-      localStorage.setItem('user', authData.user.username);
-      this.getMovies(authData.token);
-    }
+    /* onLoggedIn(authData) {
+       console.log(authData);
+       this.setState({
+         user: authData.user.username
+       });
+         localStorage.setItem('token', authData.token);
+       localStorage.setItem('user', authData.user.username);
+       this.getMovies(authData.token);
+     }*/
+
   }, {
     key: "onLoggedOut",
     value: function onLoggedOut() {

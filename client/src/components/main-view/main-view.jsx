@@ -40,9 +40,7 @@ export class MainView extends React.Component {
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
+      this.props.setUser(localStorage.getItem('user'));
       this.getMovies(accessToken);
     }
   }
@@ -61,16 +59,16 @@ export class MainView extends React.Component {
 
 
 
-  onLoggedIn(authData) {
-    console.log(authData);
-    this.setState({
-      user: authData.user.username
-    });
-
-    localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.username);
-    this.getMovies(authData.token);
-  }
+  /* onLoggedIn(authData) {
+     console.log(authData);
+     this.setState({
+       user: authData.user.username
+     });
+ 
+     localStorage.setItem('token', authData.token);
+     localStorage.setItem('user', authData.user.username);
+     this.getMovies(authData.token);
+   }*/
 
   onLoggedOut() {
     this.setState({
@@ -163,5 +161,7 @@ export class MainView extends React.Component {
 let mapStateToProps = state => {
   return { movies: state.movies, user: state.user }
 }
+
+
 
 export default connect(mapStateToProps, { setMovies, setUser })(MainView);

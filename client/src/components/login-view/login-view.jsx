@@ -25,8 +25,9 @@ function LoginView(props) {
     })
       .then(response => {
         const data = response.data;
+        console.log(data);
         localStorage.setItem('token', data.token);
-        localStorage.setItem('user', data.username);
+        localStorage.setItem('user', data.user.username);
         props.setUser(data.user.username);
         props.getMovies(data.token);
       })
