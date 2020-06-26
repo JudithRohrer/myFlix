@@ -134,6 +134,13 @@ export class ProfileView extends React.Component {
     this.setState;
   }
 
+  onLoggedOut() {
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.open('/', '_self');
+  }
+
   deRegister() {
     axios.delete(`https://myflix-123-db.herokuapp.com/users/${localStorage.getItem('user')}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
@@ -167,18 +174,23 @@ export class ProfileView extends React.Component {
         <Link to={`/`}>
           <Button variant="dark">Back</Button>
         </Link>
+        <Button
+          className="Logout-button float-right"
+          variant="outline-secondary"
+          type="submit"
+          onClick={() => this.onLoggedOut()}>Logout
+            </Button>
         <br></br>
         <br></br>
         <Card className="Profile-Card">
           <Card.Body>
-            <Button type="button" className="float-right" variant="danger" size="md" onClick={() => this.deRegister()}>Delete my account</Button>
-            <br></br>
             <br></br>
             <h2>{username}</h2>
             <br></br>
             <Card.Text>Password: ######</Card.Text>
             <Card.Text>Email: {email}</Card.Text>
             <Card.Text>Birthday: {birthday}</Card.Text>
+            <br></br>
           </Card.Body>
           <Card.Footer>
             <h5>{username}'s favorite movies: </h5>
@@ -204,6 +216,8 @@ export class ProfileView extends React.Component {
 
           </Card.Footer>
         </Card>
+        <br></br>
+        <Button type="button" className="float-right" variant="danger" size="md" onClick={() => this.deRegister()}>Delete my account</Button>
 
         <br></br>
         <br></br>

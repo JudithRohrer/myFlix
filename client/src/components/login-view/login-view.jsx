@@ -97,7 +97,8 @@ let mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginView);
 
-/*
+
 LoginView.propTypes = {
-  onLoggedIn: PropTypes.func.isRequired
-}*/
+  getMovies: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired
+}

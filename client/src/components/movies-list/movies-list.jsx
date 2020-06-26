@@ -42,5 +42,6 @@ MoviesList.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     imagePath: PropTypes.string.isRequired
-  })).isRequired
+  })).isRequired,
+  visibilityFilter: PropTypes.string.isRequired
 }

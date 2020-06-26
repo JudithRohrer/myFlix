@@ -58,39 +58,10 @@ export class MainView extends React.Component {
   }
 
 
-
-  /* onLoggedIn(authData) {
-     console.log(authData);
-     this.setState({
-       user: authData.user.username
-     });
- 
-     localStorage.setItem('token', authData.token);
-     localStorage.setItem('user', authData.user.username);
-     this.getMovies(authData.token);
-   }*/
-
-  onLoggedOut() {
-    this.setState({
-      user: null
-    })
-
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    window.open('/', '_self');
-  }
-
-
-
   render() {
     let { movies, user } = this.props;
 
-
-
-
     if (!movies) return <div className="main-view" />;
-
-
 
     return (
       <Container>
@@ -99,21 +70,14 @@ export class MainView extends React.Component {
           <Navbar sticky="top" bg="dark" variant="dark">
             <NavbarBrand href="/">MyFlix</NavbarBrand>
 
+
             <Link to={`/users/${user}`}>
               <Button
                 className="Profile-button"
-                variant="dark"
+                variant="outline-light"
               >{localStorage.getItem('user')}
               </Button>
             </Link>
-
-            <Button
-              className="Logout-button"
-              variant="dark"
-              type="submit"
-              onClick={() => this.onLoggedOut()}>Logout
-                </Button>
-
 
           </Navbar>
           <br></br>

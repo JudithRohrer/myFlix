@@ -43313,7 +43313,8 @@ var _default = (0, _reactRedux.connect)(null, {
 
 exports.default = _default;
 VisibilityFilterInput.propTypes = {
-  visibilityFilter: _propTypes.default.string.isRequired
+  visibilityFilter: _propTypes.default.string.isRequired,
+  setFilter: _propTypes.default.func.isRequired
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","../../actions/actions":"actions/actions.js"}],"../node_modules/react-bootstrap/esm/divWithClassName.js":[function(require,module,exports) {
 "use strict";
@@ -43672,7 +43673,8 @@ MoviesList.propTypes = {
     title: _propTypes.default.string.isRequired,
     description: _propTypes.default.string.isRequired,
     imagePath: _propTypes.default.string.isRequired
-  })).isRequired
+  })).isRequired,
+  visibilityFilter: _propTypes.default.string.isRequired
 };
 },{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","prop-types":"../node_modules/prop-types/index.js","../visibility-filter-input/visibility-filter-input":"components/visibility-filter-input/visibility-filter-input.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js"}],"components/login-view/login-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -43806,13 +43808,12 @@ var mapDispatchToProps = {
 };
 
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoginView);
-/*
-LoginView.propTypes = {
-  onLoggedIn: PropTypes.func.isRequired
-}*/
-
 
 exports.default = _default;
+LoginView.propTypes = {
+  getMovies: _propTypes.default.func.isRequired,
+  setUser: _propTypes.default.func.isRequired
+};
 },{"react":"../node_modules/react/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","prop-types":"../node_modules/prop-types/index.js","react-redux":"../node_modules/react-redux/es/index.js","../../actions/actions":"actions/actions.js","axios":"../node_modules/axios/index.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/movie-view/movie-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -44495,6 +44496,13 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       this.setState;
     }
   }, {
+    key: "onLoggedOut",
+    value: function onLoggedOut() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.open('/', '_self');
+    }
+  }, {
     key: "deRegister",
     value: function deRegister() {
       var _this4 = this;
@@ -44532,17 +44540,16 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         to: "/"
       }, _react.default.createElement(_Button.default, {
         variant: "dark"
-      }, "Back")), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_Card.default, {
-        className: "Profile-Card"
-      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Button.default, {
-        type: "button",
-        className: "float-right",
-        variant: "danger",
-        size: "md",
+      }, "Back")), _react.default.createElement(_Button.default, {
+        className: "Logout-button float-right",
+        variant: "outline-secondary",
+        type: "submit",
         onClick: function onClick() {
-          return _this5.deRegister();
+          return _this5.onLoggedOut();
         }
-      }, "Delete my account"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("h2", null, username), _react.default.createElement("br", null), _react.default.createElement(_Card.default.Text, null, "Password: ######"), _react.default.createElement(_Card.default.Text, null, "Email: ", email), _react.default.createElement(_Card.default.Text, null, "Birthday: ", birthday)), _react.default.createElement(_Card.default.Footer, null, _react.default.createElement("h5", null, username, "'s favorite movies: "), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, favorites == 0 && _react.default.createElement("h2", null, " No favorites yet!"), favorites && favorites.map(function (movie) {
+      }, "Logout"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_Card.default, {
+        className: "Profile-Card"
+      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement("br", null), _react.default.createElement("h2", null, username), _react.default.createElement("br", null), _react.default.createElement(_Card.default.Text, null, "Password: ######"), _react.default.createElement(_Card.default.Text, null, "Email: ", email), _react.default.createElement(_Card.default.Text, null, "Birthday: ", birthday), _react.default.createElement("br", null)), _react.default.createElement(_Card.default.Footer, null, _react.default.createElement("h5", null, username, "'s favorite movies: "), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, favorites == 0 && _react.default.createElement("h2", null, " No favorites yet!"), favorites && favorites.map(function (movie) {
         return _react.default.createElement(_Col.default, {
           lg: 2,
           key: movie._id
@@ -44564,7 +44571,15 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
             return _this5.deleteFavMovie(movie._id);
           }
         }, "Remove from list")));
-      }))), _react.default.createElement("br", null))), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_Form.default, {
+      }))), _react.default.createElement("br", null))), _react.default.createElement("br", null), _react.default.createElement(_Button.default, {
+        type: "button",
+        className: "float-right",
+        variant: "danger",
+        size: "md",
+        onClick: function onClick() {
+          return _this5.deRegister();
+        }
+      }, "Delete my account"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_Form.default, {
         className: "registrationForm"
       }, _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicUsername"
@@ -44741,26 +44756,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         console.log(error);
       });
     }
-    /* onLoggedIn(authData) {
-       console.log(authData);
-       this.setState({
-         user: authData.user.username
-       });
-         localStorage.setItem('token', authData.token);
-       localStorage.setItem('user', authData.user.username);
-       this.getMovies(authData.token);
-     }*/
-
-  }, {
-    key: "onLoggedOut",
-    value: function onLoggedOut() {
-      this.setState({
-        user: null
-      });
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.open('/', '_self');
-    }
   }, {
     key: "render",
     value: function render() {
@@ -44782,15 +44777,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         to: "/users/".concat(user)
       }, _react.default.createElement(_Button.default, {
         className: "Profile-button",
-        variant: "dark"
-      }, localStorage.getItem('user'))), _react.default.createElement(_Button.default, {
-        className: "Logout-button",
-        variant: "dark",
-        type: "submit",
-        onClick: function onClick() {
-          return _this3.onLoggedOut();
-        }
-      }, "Logout")), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {
+        variant: "outline-light"
+      }, localStorage.getItem('user')))), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: "/",
         render: function render() {
