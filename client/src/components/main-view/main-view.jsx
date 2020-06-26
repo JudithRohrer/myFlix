@@ -19,7 +19,7 @@ import NavbarBrand from 'react-bootstrap/NavbarBrand';
 import './main-view.scss';
 
 import MoviesList from '../movies-list/movies-list';
-import { LoginView } from '../login-view/login-view';
+import LoginView from '../login-view/login-view';
 import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
@@ -85,8 +85,8 @@ export class MainView extends React.Component {
 
 
   render() {
-    let { movies } = this.props;
-    let { user } = this.state;
+    let { movies, user } = this.props;
+
 
 
 
@@ -124,7 +124,7 @@ export class MainView extends React.Component {
           <Row>
             <Route exact path="/" render={() => {
               if (!user) return (
-                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />);
+                <LoginView getMovies={(token) => this.getMovies(token)} />);
               return <MoviesList movies={movies}
               />;
             }} />

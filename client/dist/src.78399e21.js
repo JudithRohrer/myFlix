@@ -43685,7 +43685,7 @@ module.hot.accept(reloadCSS);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.LoginView = LoginView;
+exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -43702,6 +43702,10 @@ var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _reactRedux = require("react-redux");
+
+var _actions = require("../../actions/actions");
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -43744,7 +43748,10 @@ function LoginView(props) {
       password: password
     }).then(function (response) {
       var data = response.data;
-      props.onLoggedIn(data);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', data.username);
+      props.setUser(data.user.username);
+      props.getMovies(data.token);
     }).catch(function (e) {
       console.log('no such user');
     });
@@ -43787,10 +43794,25 @@ function LoginView(props) {
   }, "Or register now!"))))));
 }
 
-LoginView.propTypes = {
-  onLoggedIn: _propTypes.default.func.isRequired
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    user: state.user
+  };
 };
-},{"react":"../node_modules/react/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/movie-view/movie-view.scss":[function(require,module,exports) {
+
+var mapDispatchToProps = {
+  setUser: _actions.setUser
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoginView);
+/*
+LoginView.propTypes = {
+  onLoggedIn: PropTypes.func.isRequired
+}*/
+
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","prop-types":"../node_modules/prop-types/index.js","react-redux":"../node_modules/react-redux/es/index.js","../../actions/actions":"actions/actions.js","axios":"../node_modules/axios/index.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/movie-view/movie-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -44640,7 +44662,7 @@ require("./main-view.scss");
 
 var _moviesList = _interopRequireDefault(require("../movies-list/movies-list"));
 
-var _loginView = require("../login-view/login-view");
+var _loginView = _interopRequireDefault(require("../login-view/login-view"));
 
 var _movieView = require("../movie-view/movie-view");
 
@@ -44746,8 +44768,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      var movies = this.props.movies;
-      var user = this.state.user;
+      var _this$props = this.props,
+          movies = _this$props.movies,
+          user = _this$props.user;
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
       });
@@ -44773,9 +44796,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         exact: true,
         path: "/",
         render: function render() {
-          if (!user) return _react.default.createElement(_loginView.LoginView, {
-            onLoggedIn: function onLoggedIn(user) {
-              return _this3.onLoggedIn(user);
+          if (!user) return _react.default.createElement(_loginView.default, {
+            getMovies: function getMovies(token) {
+              return _this3.getMovies(token);
             }
           });
           return _react.default.createElement(_moviesList.default, {
@@ -44893,8 +44916,8 @@ function movies() {
   }
 }
 
-function currentUser() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+function user() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
@@ -44909,7 +44932,7 @@ function currentUser() {
 var moviesApp = (0, _redux.combineReducers)({
   visibilityFilter: visibilityFilter,
   movies: movies,
-  currentUser: currentUser
+  user: user
 });
 var _default = moviesApp;
 exports.default = _default;

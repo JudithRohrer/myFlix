@@ -6,12 +6,14 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { setUser } from '../../actions/actions';
 
 import axios from 'axios';
 
 import './login-view.scss';
 
-export function LoginView(props) {
+function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -23,7 +25,10 @@ export function LoginView(props) {
     })
       .then(response => {
         const data = response.data;
-        props.onLoggedIn(data);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', data.username);
+        props.setUser(data.user.username);
+        props.getMovies(data.token);
       })
       .catch(e => {
         console.log('no such user')
@@ -81,6 +86,17 @@ export function LoginView(props) {
   );
 }
 
+let mapStateToProps = state => {
+  return { user: state.user }
+}
+
+let mapDispatchToProps = {
+  setUser: setUser
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginView);
+
+/*
 LoginView.propTypes = {
   onLoggedIn: PropTypes.func.isRequired
-}
+}*/
