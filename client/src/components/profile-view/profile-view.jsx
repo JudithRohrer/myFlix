@@ -26,11 +26,6 @@ export class ProfileView extends React.Component {
     super();
 
     this.state = {
-      username: null,
-      password: null,
-      email: null,
-      birthday: null,
-      favorites: [],
       usernameField: '',
       passwordField: '',
       emailField: '',
@@ -149,8 +144,7 @@ export class ProfileView extends React.Component {
         localStorage.removeItem('user');
         window.open('/', '_self');
         this.setState({
-          user: null,
-          register: false
+          user: null
         });
         console.log('user deleted')
       })
@@ -170,18 +164,24 @@ export class ProfileView extends React.Component {
     return (
 
       <Col>
-
-        <Card className="Profile-Card" >
+        <Link to={`/`}>
+          <Button variant="dark">Back</Button>
+        </Link>
+        <br></br>
+        <br></br>
+        <Card className="Profile-Card">
           <Card.Body>
-            <Button type="button" className="btn-block" variant="danger" size="md" onClick={() => this.deRegister()}>Delete my account</Button>
+            <Button type="button" className="float-right" variant="danger" size="md" onClick={() => this.deRegister()}>Delete my account</Button>
             <br></br>
-            <Card.Title>{username}</Card.Title>
+            <br></br>
+            <h2>{username}</h2>
+            <br></br>
             <Card.Text>Password: ######</Card.Text>
             <Card.Text>Email: {email}</Card.Text>
             <Card.Text>Birthday: {birthday}</Card.Text>
           </Card.Body>
           <Card.Footer>
-            <h4>{username}'s favorite movies: </h4>
+            <h5>{username}'s favorite movies: </h5>
             <Container>
               <Row>
                 {favorites == 0 && <h2> No favorites yet!</h2>}
@@ -201,12 +201,12 @@ export class ProfileView extends React.Component {
               </Row>
             </Container>
             <br></br>
-            <Link to={`/`}>
-              <Button variant="dark">Back</Button>
-            </Link>
+
           </Card.Footer>
         </Card>
 
+        <br></br>
+        <br></br>
         <br></br>
         <br></br>
 
@@ -255,12 +255,12 @@ export class ProfileView extends React.Component {
             />
           </Form.Group>
 
-          <Button variant="info" onClick={() => this.handleUpdate()}>Update Profile</Button>
+          <Button variant="light" onClick={() => this.handleUpdate()}>Update Profile</Button>
 
 
         </Form>
 
-      </Col>
+      </Col >
     )
   }
 }

@@ -12,7 +12,9 @@ import { setUser } from '../../actions/actions';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import Navbar from 'react-bootstrap/Navbar';
+import NavbarBrand from 'react-bootstrap/NavbarBrand';
+
 
 import './main-view.scss';
 
@@ -23,6 +25,7 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
+
 
 export class MainView extends React.Component {
 
@@ -76,6 +79,7 @@ export class MainView extends React.Component {
 
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    window.open('/', '_self');
   }
 
 
@@ -94,27 +98,28 @@ export class MainView extends React.Component {
       <Container>
         <Router>
 
+          <Navbar sticky="top" bg="dark" variant="dark">
+            <NavbarBrand href="/">MyFlix</NavbarBrand>
 
-          <Row>
-            <Col>
-              <Link to={`/users/${user}`}>
-                <Button
-                  className="Profile-button"
-                  variant="info"
-                >Your profile
-                </Button>
-              </Link>
-
-
+            <Link to={`/users/${user}`}>
               <Button
-                className="Logout-button"
+                className="Profile-button"
                 variant="dark"
-                type="submit"
-                onClick={() => this.onLoggedOut()}>Logout
+              >Profile
                 </Button>
-            </Col>
-          </Row>
+            </Link>
 
+            <Button
+              className="Logout-button"
+              variant="dark"
+              type="submit"
+              onClick={() => this.onLoggedOut()}>Logout
+                </Button>
+
+
+          </Navbar>
+          <br></br>
+          <br></br>
 
           <Row>
             <Route exact path="/" render={() => {
@@ -150,7 +155,7 @@ export class MainView extends React.Component {
 
 
         </Router >
-      </Container>
+      </Container >
     );
   }
 }

@@ -24,9 +24,9 @@ function MoviesList(props) {
 
   return (
     <div className="movie-list">
-      <Container className="display-flex mt-5">
+      <Container className="display-flex">
+        <VisibilityFilterInput visibilityFilter={visibilityFilter} />
         <Row className="justify-content-center">
-          <VisibilityFilterInput visibilityFilter={visibilityFilter} />
           {filteredMovies.map((m) => (<MovieCard key={m._id} movie={m} />))}
         </Row>
       </Container>

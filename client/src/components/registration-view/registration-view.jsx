@@ -43,11 +43,14 @@ export function RegistrationView(props) {
 
 
   return (
-    <Container>
-      <Row>
+    <Container style={{ maxWidth: "50rem", margin: "0 auto" }}>
+
+      <Row className="bg-light p-5">
         <Col>
-          <h1>Welcome to myFlix</h1>
-          <h4>Come and join our wonderfull world of movies!</h4>
+          <h2>Welcome to myFlix</h2>
+          <p>Come and join our wonderfull world of movies!</p>
+
+          <br></br>
           <Form className="registrationForm">
             <Form.Group controlId="formBasicUsername">
               <Form.Label>Username:</Form.Label>
@@ -100,7 +103,7 @@ export function RegistrationView(props) {
           </Form>
         </Col>
       </Row>
-    </Container>
+    </Container >
   );
 }
 

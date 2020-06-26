@@ -13,7 +13,7 @@ export class MovieCard extends React.Component {
 
   addFavMovie(movieId) {
     axios
-      .post(`https://myflix-123-db.herokuapp.com/users/${localStorage.getItem('user')}/favorites/${movieId}`, {
+      .post(`https://myflix-123-db.herokuapp.com/users/${localStorage.getItem('user')}/favorites/${movieId}`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       })
       .then(res => {

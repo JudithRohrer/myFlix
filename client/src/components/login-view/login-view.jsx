@@ -35,10 +35,11 @@ export function LoginView(props) {
 
 
   return (
-    <Container>
-      <Row>
+    <Container style={{ maxWidth: "50rem", margin: "0 auto" }}>
+
+      <Row className="bg-light p-5">
         <Col>
-          <h1>Log in</h1><br />
+          <h2>Log in</h2><br />
           <Form>
             <Form.Group controlId="formBasicUsername">
               <Form.Label>Username:</Form.Label>
