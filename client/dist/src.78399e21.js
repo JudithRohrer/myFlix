@@ -44762,7 +44762,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }, _react.default.createElement(_Button.default, {
         className: "Profile-button",
         variant: "dark"
-      }, "Profile")), _react.default.createElement(_Button.default, {
+      }, localStorage.getItem('user'))), _react.default.createElement(_Button.default, {
         className: "Logout-button",
         variant: "dark",
         type: "submit",

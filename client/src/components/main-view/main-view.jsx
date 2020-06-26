@@ -105,8 +105,8 @@ export class MainView extends React.Component {
               <Button
                 className="Profile-button"
                 variant="dark"
-              >Profile
-                </Button>
+              >{localStorage.getItem('user')}
+              </Button>
             </Link>
 
             <Button
