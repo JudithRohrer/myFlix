@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { setMovies, setUser } from '../../actions/actions';
+import { setUser, setFavorites } from '../../actions/actions';
 
 
 import Button from 'react-bootstrap/Button';
@@ -20,7 +20,7 @@ import { connect } from 'react-redux';
 
 
 
-export class ProfileView extends React.Component {
+class ProfileView extends React.Component {
 
   constructor() {
     super();
@@ -120,18 +120,12 @@ export class ProfileView extends React.Component {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       })
       .then(res => {
-        let newFavorites = this.state.favorites.filter((movie) => {
-          return res.data.favorites.includes(movie._id);
-        });
-        this.setState({
-          favorites: newFavorites
-        });
-
+        this.props.setFavorites(res.data.favorites);
+        localStorage.setItem('favorites', JSON.stringify(res.data.favorites));
       })
       .catch(function () {
         console.log("Cannot delete movie from list");
       });
-    this.setState;
   }
 
   onLoggedOut() {
@@ -164,8 +158,12 @@ export class ProfileView extends React.Component {
 
   render() {
 
-    const { username, email, birthday, favorites } = this.state;
+    const { username, email, birthday } = this.state;
+    const { movies, favorites } = this.props;
 
+    let detailedFavorites = movies.filter(movie => {
+      return favorites.includes(movie._id);
+    });
 
 
     return (
@@ -198,7 +196,7 @@ export class ProfileView extends React.Component {
               <Row>
                 {favorites == 0 && <h2> No favorites yet!</h2>}
                 {favorites &&
-                  favorites.map(movie => {
+                  detailedFavorites.map(movie => {
                     return (
                       <Col lg={2} key={movie._id}>
                         <Card className="profile-view-card" style={{ maxWidth: "10rem", margin: "0 auto" }}>
@@ -281,7 +279,7 @@ export class ProfileView extends React.Component {
 
 
 let mapStateToProps = state => {
-  return { movies: state.movies, user: state.user }
+  return { movies: state.movies, user: state.user, favorites: state.favorites }
 };
 
-export default connect(mapStateToProps, { setMovies, setUser })(ProfileView);
+export default connect(mapStateToProps, { setUser, setFavorites })(ProfileView);

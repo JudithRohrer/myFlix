@@ -21,8 +21,8 @@ class MovieCard extends React.Component {
       })
       .then(res => {
         console.log(res);
-        let newFavorites = [movieId, ...this.props.favorites];
-        this.props.setFavorites(newFavorites);
+        this.props.setFavorites(res.data.favorites);
+        localStorage.setItem('favorites', JSON.stringify(res.data.favorites));
         alert('Movie has been added to favorites!')
       })
       .catch(err => {

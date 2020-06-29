@@ -43531,18 +43531,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -43585,10 +43573,10 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
         }
       }).then(function (res) {
         console.log(res);
-        var newFavorites = [movieId].concat(_toConsumableArray(_this.props.favorites));
 
-        _this.props.setFavorites(newFavorites);
+        _this.props.setFavorites(res.data.favorites);
 
+        localStorage.setItem('favorites', JSON.stringify(res.data.favorites));
         alert('Movie has been added to favorites!');
       }).catch(function (err) {
         console.log(err);
@@ -44371,7 +44359,7 @@ GenreView.propTypes = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.ProfileView = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -44534,18 +44522,12 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           Authorization: "Bearer ".concat(localStorage.getItem("token"))
         }
       }).then(function (res) {
-        var newFavorites = _this3.state.favorites.filter(function (movie) {
-          return res.data.favorites.includes(movie._id);
-        });
+        _this3.props.setFavorites(res.data.favorites);
 
-        _this3.setState({
-          favorites: newFavorites
-        });
+        localStorage.setItem('favorites', JSON.stringify(res.data.favorites));
       }).catch(function () {
         console.log("Cannot delete movie from list");
       });
-
-      this.setState;
     }
   }, {
     key: "onLoggedOut",
@@ -44586,8 +44568,13 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       var _this$state = this.state,
           username = _this$state.username,
           email = _this$state.email,
-          birthday = _this$state.birthday,
-          favorites = _this$state.favorites;
+          birthday = _this$state.birthday;
+      var _this$props = this.props,
+          movies = _this$props.movies,
+          favorites = _this$props.favorites;
+      var detailedFavorites = movies.filter(function (movie) {
+        return favorites.includes(movie._id);
+      });
       return _react.default.createElement(_Col.default, null, _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
       }, _react.default.createElement(_Button.default, {
@@ -44601,7 +44588,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         }
       }, "Logout"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_Card.default, {
         className: "Profile-Card"
-      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement("br", null), _react.default.createElement("h2", null, username), _react.default.createElement("br", null), _react.default.createElement(_Card.default.Text, null, "Password: ######"), _react.default.createElement(_Card.default.Text, null, "Email: ", email), _react.default.createElement(_Card.default.Text, null, "Birthday: ", birthday), _react.default.createElement("br", null)), _react.default.createElement(_Card.default.Footer, null, _react.default.createElement("h5", null, username, "'s favorite movies: "), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, favorites == 0 && _react.default.createElement("h2", null, " No favorites yet!"), favorites && favorites.map(function (movie) {
+      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement("br", null), _react.default.createElement("h2", null, username), _react.default.createElement("br", null), _react.default.createElement(_Card.default.Text, null, "Password: ######"), _react.default.createElement(_Card.default.Text, null, "Email: ", email), _react.default.createElement(_Card.default.Text, null, "Birthday: ", birthday), _react.default.createElement("br", null)), _react.default.createElement(_Card.default.Footer, null, _react.default.createElement("h5", null, username, "'s favorite movies: "), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, favorites == 0 && _react.default.createElement("h2", null, " No favorites yet!"), favorites && detailedFavorites.map(function (movie) {
         return _react.default.createElement(_Col.default, {
           lg: 2,
           key: movie._id
@@ -44683,18 +44670,17 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
   return ProfileView;
 }(_react.default.Component);
 
-exports.ProfileView = ProfileView;
-
 var mapStateToProps = function mapStateToProps(state) {
   return {
     movies: state.movies,
-    user: state.user
+    user: state.user,
+    favorites: state.favorites
   };
 };
 
 var _default = (0, _reactRedux.connect)(mapStateToProps, {
-  setMovies: _actions.setMovies,
-  setUser: _actions.setUser
+  setUser: _actions.setUser,
+  setFavorites: _actions.setFavorites
 })(ProfileView);
 
 exports.default = _default;
@@ -44742,7 +44728,7 @@ var _directorView = require("../director-view/director-view");
 
 var _genreView = require("../genre-view/genre-view");
 
-var _profileView = require("../profile-view/profile-view");
+var _profileView = _interopRequireDefault(require("../profile-view/profile-view"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44913,7 +44899,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           if (!user || user.length == 0) return _react.default.createElement("div", {
             className: "main-view"
           });
-          return _react.default.createElement(_profileView.ProfileView, null);
+          return _react.default.createElement(_profileView.default, null);
         }
       }))));
     }
