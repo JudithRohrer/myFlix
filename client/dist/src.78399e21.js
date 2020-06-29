@@ -39491,13 +39491,16 @@ Object.defineProperty(exports, "__esModule", {
 exports.setMovies = setMovies;
 exports.setFilter = setFilter;
 exports.setUser = setUser;
-exports.SET_USER = exports.SET_FILTER = exports.SET_MOVIES = void 0;
+exports.setFavorites = setFavorites;
+exports.SET_FAVORITES = exports.SET_USER = exports.SET_FILTER = exports.SET_MOVIES = void 0;
 var SET_MOVIES = 'SET_MOVIES';
 exports.SET_MOVIES = SET_MOVIES;
 var SET_FILTER = 'SET_FILTER';
 exports.SET_FILTER = SET_FILTER;
 var SET_USER = 'SET_USER';
 exports.SET_USER = SET_USER;
+var SET_FAVORITES = 'SET_FAVORITES';
+exports.SET_FAVORITES = SET_FAVORITES;
 
 function setMovies(value) {
   return {
@@ -39516,6 +39519,13 @@ function setFilter(value) {
 function setUser(value) {
   return {
     type: SET_USER,
+    value: value
+  };
+}
+
+function setFavorites(value) {
+  return {
+    type: SET_FAVORITES,
     value: value
   };
 }
@@ -43497,7 +43507,7 @@ module.hot.accept(reloadCSS);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MovieCard = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -43509,6 +43519,10 @@ var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 var _Card = _interopRequireDefault(require("react-bootstrap/Card"));
 
+var _reactRedux = require("react-redux");
+
+var _actions = require("../../actions/actions");
+
 var _reactRouterDom = require("react-router-dom");
 
 require("./movie-card.scss");
@@ -43516,6 +43530,18 @@ require("./movie-card.scss");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -43551,12 +43577,18 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
   _createClass(MovieCard, [{
     key: "addFavMovie",
     value: function addFavMovie(movieId) {
+      var _this = this;
+
       _axios.default.post("https://myflix-123-db.herokuapp.com/users/".concat(localStorage.getItem('user'), "/favorites/").concat(movieId), {}, {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem("token"))
         }
       }).then(function (res) {
         console.log(res);
+        var newFavorites = [movieId].concat(_toConsumableArray(_this.props.favorites));
+
+        _this.props.setFavorites(newFavorites);
+
         alert('Movie has been added to favorites!');
       }).catch(function (err) {
         console.log(err);
@@ -43566,9 +43598,11 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
-      var movie = this.props.movie;
+      var _this$props = this.props,
+          movie = _this$props.movie,
+          favorites = _this$props.favorites;
       return _react.default.createElement(_Card.default, {
         className: "cardBody box-shadow m-2",
         style: {
@@ -43583,11 +43617,13 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
         to: "/movies/".concat(movie._id)
       }, _react.default.createElement(_Button.default, {
         variant: "dark"
-      }, "Open")), _react.default.createElement(_Button.default, {
+      }, "Open")), favorites.find(function (id) {
+        return id === movie._id;
+      }) ? null : _react.default.createElement(_Button.default, {
         className: "ml-2",
         variant: "outline-info",
         onClick: function onClick() {
-          return _this.addFavMovie(movie._id);
+          return _this2.addFavMovie(movie._id);
         }
       }, "Add to favorites")));
     }
@@ -43596,7 +43632,19 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
   return MovieCard;
 }(_react.default.Component);
 
-exports.MovieCard = MovieCard;
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    favorites: state.favorites
+  };
+};
+
+var mapDispatchToProps = {
+  setFavorites: _actions.setFavorites
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MovieCard);
+
+exports.default = _default;
 MovieCard.propTypes = {
   movie: _propTypes.default.shape({
     title: _propTypes.default.string.isRequired,
@@ -43604,7 +43652,7 @@ MovieCard.propTypes = {
     imagePath: _propTypes.default.string.isRequired
   }).isRequired
 };
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","./movie-card.scss":"components/movie-card/movie-card.scss"}],"components/movies-list/movies-list.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","react-redux":"../node_modules/react-redux/es/index.js","../../actions/actions":"actions/actions.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","./movie-card.scss":"components/movie-card/movie-card.scss"}],"components/movies-list/movies-list.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -43620,7 +43668,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _visibilityFilterInput = _interopRequireDefault(require("../visibility-filter-input/visibility-filter-input"));
 
-var _movieCard = require("../movie-card/movie-card");
+var _movieCard = _interopRequireDefault(require("../movie-card/movie-card"));
 
 var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
 
@@ -43658,7 +43706,7 @@ function MoviesList(props) {
   }), _react.default.createElement(_Row.default, {
     className: "justify-content-center"
   }, filteredMovies.map(function (m) {
-    return _react.default.createElement(_movieCard.MovieCard, {
+    return _react.default.createElement(_movieCard.default, {
       key: m._id,
       movie: m
     });
@@ -43798,9 +43846,7 @@ function LoginView(props) {
 }
 
 var mapStateToProps = function mapStateToProps(state) {
-  return {
-    user: state.user
-  };
+  return {};
 };
 
 var mapDispatchToProps = {
@@ -44660,6 +44706,8 @@ var _axios = _interopRequireDefault(require("axios"));
 
 var _reactRedux = require("react-redux");
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 var _reactRouterDom = require("react-router-dom");
 
 var _actions = require("../../actions/actions");
@@ -44738,6 +44786,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
       if (accessToken !== null) {
         this.props.setUser(localStorage.getItem('user'));
+        this.props.setFavorites(JSON.parse(localStorage.getItem('favorites')));
         this.getMovies(accessToken);
       }
     }
@@ -44794,12 +44843,20 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/register",
         render: function render() {
+          if (user) return _react.default.createElement(_reactRouterDom.Redirect, {
+            to: "/"
+          });
           return _react.default.createElement(_registrationView.RegistrationView, null);
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/movies/:movieId",
         render: function render(_ref) {
           var match = _ref.match;
+          if (!user) return _react.default.createElement(_loginView.default, {
+            getMovies: function getMovies(token) {
+              return _this3.getMovies(token);
+            }
+          });
           return _react.default.createElement(_movieView.MovieView, {
             movie: movies.find(function (m) {
               return m._id === match.params.movieId;
@@ -44810,6 +44867,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         path: "/genres/:name",
         render: function render(_ref2) {
           var match = _ref2.match;
+          if (!user) return _react.default.createElement(_loginView.default, {
+            getMovies: function getMovies(token) {
+              return _this3.getMovies(token);
+            }
+          });
           if (movies.length == 0) return _react.default.createElement("div", {
             className: "main-view"
           });
@@ -44824,6 +44886,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         path: "/directors/:name",
         render: function render(_ref3) {
           var match = _ref3.match;
+          if (!user) return _react.default.createElement(_loginView.default, {
+            getMovies: function getMovies(token) {
+              return _this3.getMovies(token);
+            }
+          });
           if (movies.length == 0) return _react.default.createElement("div", {
             className: "main-view"
           });
@@ -44860,11 +44927,23 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var _default = (0, _reactRedux.connect)(mapStateToProps, {
   setMovies: _actions.setMovies,
-  setUser: _actions.setUser
+  setUser: _actions.setUser,
+  setFavorites: _actions.setFavorites
 })(MainView);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","../../actions/actions":"actions/actions.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/NavbarBrand":"../node_modules/react-bootstrap/esm/NavbarBrand.js","./main-view.scss":"components/main-view/main-view.scss","../movies-list/movies-list":"components/movies-list/movies-list.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx"}],"reducers/reducers.js":[function(require,module,exports) {
+MainView.propTypes = {
+  setMovies: _propTypes.default.func.isRequired,
+  setUser: _propTypes.default.func.isRequired,
+  movies: _propTypes.default.arrayOf(_propTypes.default.shape({
+    title: _propTypes.default.string.isRequired,
+    description: _propTypes.default.string.isRequired,
+    imagePath: _propTypes.default.string.isRequired
+  })).isRequired
+  /*user: PropTypes.object.isRequired*/
+
+};
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-redux":"../node_modules/react-redux/es/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","../../actions/actions":"actions/actions.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/NavbarBrand":"../node_modules/react-bootstrap/esm/NavbarBrand.js","./main-view.scss":"components/main-view/main-view.scss","../movies-list/movies-list":"components/movies-list/movies-list.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx"}],"reducers/reducers.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44915,10 +44994,24 @@ function user() {
   }
 }
 
+function favorites() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions.SET_FAVORITES:
+      return action.value;
+
+    default:
+      return state;
+  }
+}
+
 var moviesApp = (0, _redux.combineReducers)({
   visibilityFilter: visibilityFilter,
   movies: movies,
-  user: user
+  user: user,
+  favorites: favorites
 });
 var _default = moviesApp;
 exports.default = _default;

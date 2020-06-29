@@ -4,11 +4,14 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
+import { connect } from 'react-redux';
+import { setFavorites } from '../../actions/actions';
+
 import { Link } from 'react-router-dom';
 
 import './movie-card.scss';
 
-export class MovieCard extends React.Component {
+class MovieCard extends React.Component {
 
 
   addFavMovie(movieId) {
@@ -18,6 +21,8 @@ export class MovieCard extends React.Component {
       })
       .then(res => {
         console.log(res);
+        let newFavorites = [movieId, ...this.props.favorites];
+        this.props.setFavorites(newFavorites);
         alert('Movie has been added to favorites!')
       })
       .catch(err => {
@@ -29,29 +34,40 @@ export class MovieCard extends React.Component {
 
 
   render() {
-    const { movie } = this.props;
+    const { movie, favorites } = this.props;
 
     return (
 
       <Card className="cardBody box-shadow m-2" style={{ maxWidth: "16rem", margin: "0 auto" }} >
         <Card.Img className="cardImage" variant="top" src={movie.imagePath} />
         <Card.Body>
+
           <Card.Title>{movie.title}</Card.Title>
           <Card.Text>{movie.description}</Card.Text>
           <Link to={`/movies/${movie._id}`}>
             <Button variant="dark">Open</Button>
           </Link>
-          <Button
+          {favorites.find(id => id === movie._id) ? null : (<Button
             className="ml-2"
             variant="outline-info"
             onClick={() => this.addFavMovie(movie._id)}>Add to favorites
-          </Button>
+          </Button>)}
 
         </Card.Body>
       </Card>
     );
   }
 }
+
+let mapStateToProps = state => {
+  return { favorites: state.favorites }
+}
+
+let mapDispatchToProps = {
+  setFavorites: setFavorites
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieCard);
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({

@@ -88,7 +88,7 @@ function LoginView(props) {
 }
 
 let mapStateToProps = state => {
-  return { user: state.user }
+  return {}
 }
 
 let mapDispatchToProps = {

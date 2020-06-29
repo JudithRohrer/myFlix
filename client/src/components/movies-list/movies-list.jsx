@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
-import { MovieCard } from '../movie-card/movie-card';
+import MovieCard from '../movie-card/movie-card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 

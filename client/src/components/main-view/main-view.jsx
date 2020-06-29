@@ -2,12 +2,15 @@ import React from 'react';
 import axios from 'axios';
 
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { BrowserRouter as Router, Route, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { setMovies } from '../../actions/actions';
 import { setUser } from '../../actions/actions';
+import { setFavorites } from '../../actions/actions';
 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -41,6 +44,7 @@ export class MainView extends React.Component {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.props.setUser(localStorage.getItem('user'));
+      this.props.setFavorites(JSON.parse(localStorage.getItem('favorites')));
       this.getMovies(accessToken);
     }
   }
@@ -70,7 +74,6 @@ export class MainView extends React.Component {
           <Navbar sticky="top" bg="dark" variant="dark">
             <NavbarBrand href="/">MyFlix</NavbarBrand>
 
-
             <Link to={`/users/${user}`}>
               <Button
                 className="Profile-button"
@@ -91,17 +94,25 @@ export class MainView extends React.Component {
               />;
             }} />
 
-            <Route path="/register" render={() => <RegistrationView />} />
+            <Route path="/register" render={() => {
+              if (user) return <Redirect to="/" />;
+              return <RegistrationView />;
+            }} />
 
-            <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
+            <Route path="/movies/:movieId" render={({ match }) => {
+              if (!user) return <LoginView getMovies={(token) => this.getMovies(token)} />;
+              return <MovieView movie={movies.find(m => m._id === match.params.movieId)} />;
+            }} />
 
             <Route path="/genres/:name" render={({ match }) => {
+              if (!user) return <LoginView getMovies={(token) => this.getMovies(token)} />;
               if (movies.length == 0)
-                return <div className="main-view" />
+                return <div className="main-view" />;
               return <GenreView genre={movies.find(m => m.genre.name === match.params.name).genre} movies={movies} />
             }} />
 
             <Route path="/directors/:name" render={({ match }) => {
+              if (!user) return <LoginView getMovies={(token) => this.getMovies(token)} />;
               if (movies.length == 0)
                 return <div className="main-view" />;
               return <DirectorView director={movies.find(m => m.director.name === match.params.name).director} movies={movies} />
@@ -127,5 +138,15 @@ let mapStateToProps = state => {
 }
 
 
+export default connect(mapStateToProps, { setMovies, setUser, setFavorites })(MainView);
 
-export default connect(mapStateToProps, { setMovies, setUser })(MainView);
+MainView.propTypes = {
+  setMovies: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    imagePath: PropTypes.string.isRequired
+  })).isRequired,
+  /*user: PropTypes.object.isRequired*/
+}
