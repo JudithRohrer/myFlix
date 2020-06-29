@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setUser } from '../../actions/actions';
+import { setUser, setFavorites } from '../../actions/actions';
 
 import axios from 'axios';
 
@@ -29,6 +29,8 @@ function LoginView(props) {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', data.user.username);
         props.setUser(data.user.username);
+        props.setFavorites(data.user.favorites);
+        localStorage.setItem('favorites', JSON.stringify(data.user.favorites));
         props.getMovies(data.token);
       })
       .catch(e => {
@@ -92,7 +94,8 @@ let mapStateToProps = state => {
 }
 
 let mapDispatchToProps = {
-  setUser: setUser
+  setUser: setUser,
+  setFavorites: setFavorites
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginView);

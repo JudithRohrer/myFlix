@@ -138,6 +138,8 @@ let mapStateToProps = state => {
 }
 
 
+
+
 export default connect(mapStateToProps, { setMovies, setUser, setFavorites })(MainView);
 
 MainView.propTypes = {

@@ -43651,6 +43651,9 @@ MovieCard.propTypes = {
     description: _propTypes.default.string.isRequired,
     imagePath: _propTypes.default.string.isRequired
   }).isRequired
+  /*,
+  favorites: PropTypes.object.isRequired*/
+
 };
 },{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","react-redux":"../node_modules/react-redux/es/index.js","../../actions/actions":"actions/actions.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","./movie-card.scss":"components/movie-card/movie-card.scss"}],"components/movies-list/movies-list.jsx":[function(require,module,exports) {
 "use strict";
@@ -43802,6 +43805,8 @@ function LoginView(props) {
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', data.user.username);
       props.setUser(data.user.username);
+      props.setFavorites(data.user.favorites);
+      localStorage.setItem('favorites', JSON.stringify(data.user.favorites));
       props.getMovies(data.token);
     }).catch(function (e) {
       console.log('no such user');
@@ -43850,7 +43855,8 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = {
-  setUser: _actions.setUser
+  setUser: _actions.setUser,
+  setFavorites: _actions.setFavorites
 };
 
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoginView);
