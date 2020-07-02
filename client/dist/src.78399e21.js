@@ -44426,43 +44426,37 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     };
     return _this;
   }
+  /* componentDidMount() {
+     let accessToken = localStorage.getItem('token');
+     if (accessToken !== null) {
+       this.setState({
+         user: localStorage.getItem('user')
+       });
+       this.getUsers(accessToken);
+     }
+   }*/
 
-  _createClass(ProfileView, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var accessToken = localStorage.getItem('token');
-
-      if (accessToken !== null) {
-        this.setState({
-          user: localStorage.getItem('user')
-        });
-        this.getUsers(accessToken);
-      }
-    }
-  }, {
-    key: "getUsers",
-    value: function getUsers(token) {
-      var _this2 = this;
-
-      _axios.default.get("https://myflix-123-db.herokuapp.com/users/".concat(localStorage.getItem('user')), {
-        headers: {
-          Authorization: "Bearer ".concat(token)
-        }
-      }).then(function (response) {
+  /*getUsers(token) {
+    axios.get(`https://myflix-123-db.herokuapp.com/users/${localStorage.getItem('user')}`, {
+       headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
         console.log(response);
-
-        _this2.setState({
+        this.setState({
           username: response.data.username,
           password: response.data.password,
           email: response.data.email,
           birthday: response.data.birthday ? response.data.birthday.substr(0, 10) : " ",
           favorites: response.data.favorites
         });
-      }).catch(function (error) {
+      })
+      .catch(function (error) {
         console.log(error);
       });
-    }
-  }, {
+  }*/
+
+
+  _createClass(ProfileView, [{
     key: "setUsernameField",
     value: function setUsernameField(NewUsername) {
       this.setState({
@@ -44493,6 +44487,8 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleUpdate",
     value: function handleUpdate() {
+      var _this2 = this;
+
       _axios.default.put("https://myflix-123-db.herokuapp.com/users/".concat(localStorage.getItem('user')), {
         username: this.state.usernameField,
         password: this.state.passwordField,
@@ -44505,7 +44501,9 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       }).then(function (response) {
         var data = response.data;
         localStorage.setItem('user', data.username);
-        window.open("/users/".concat(localStorage.getItem('user')), '_self');
+
+        _this2.props.setUser(data.username);
+
         console.log(data);
         alert('Your profile has been updated successfully');
       }).catch(function (e) {
@@ -44534,7 +44532,9 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     value: function onLoggedOut() {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.open('/', '_self');
+      localStorage.removeItem('favorites');
+      this.props.setUser(null);
+      this.props.setFavorites([]);
     }
   }, {
     key: "deRegister",
@@ -44547,13 +44547,8 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         }
       }).then(function (response) {
         alert('User has been successfully deleted!');
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        window.open('/', '_self');
 
-        _this4.setState({
-          user: null
-        });
+        _this4.onLoggedOut();
 
         console.log('user deleted');
       }).catch(function (error) {
@@ -44896,8 +44891,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/users/:username",
         render: function render() {
-          if (!user || user.length == 0) return _react.default.createElement("div", {
-            className: "main-view"
+          if (!user) return _react.default.createElement(_loginView.default, {
+            getMovies: function getMovies(token) {
+              return _this3.getMovies(token);
+            }
           });
           return _react.default.createElement(_profileView.default, null);
         }

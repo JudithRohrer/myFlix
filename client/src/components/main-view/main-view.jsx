@@ -119,8 +119,7 @@ export class MainView extends React.Component {
             }} />
 
             <Route path="/users/:username" render={() => {
-              if (!user || user.length == 0)
-                return <div className="main-view" />;
+              if (!user) return <LoginView getMovies={(token) => this.getMovies(token)} />;
               return <ProfileView />;
             }}
             />

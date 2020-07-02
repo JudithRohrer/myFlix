@@ -17,9 +17,6 @@ import { connect } from 'react-redux';
 
 
 
-
-
-
 class ProfileView extends React.Component {
 
   constructor() {
@@ -33,19 +30,19 @@ class ProfileView extends React.Component {
     };
   }
 
-  componentDidMount() {
-    let accessToken = localStorage.getItem('token');
-    if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
-      this.getUsers(accessToken);
-    }
-  }
+  /* componentDidMount() {
+     let accessToken = localStorage.getItem('token');
+     if (accessToken !== null) {
+       this.setState({
+         user: localStorage.getItem('user')
+       });
+       this.getUsers(accessToken);
+     }
+   }*/
 
 
 
-  getUsers(token) {
+  /*getUsers(token) {
     axios.get(`https://myflix-123-db.herokuapp.com/users/${localStorage.getItem('user')}`, {
 
       headers: { Authorization: `Bearer ${token}` }
@@ -63,7 +60,7 @@ class ProfileView extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-  }
+  }*/
 
 
   setUsernameField(NewUsername) {
@@ -104,10 +101,9 @@ class ProfileView extends React.Component {
       .then(response => {
         const data = response.data;
         localStorage.setItem('user', data.username);
-        window.open(`/users/${localStorage.getItem('user')}`, '_self');
+        this.props.setUser(data.username);
         console.log(data);
-        alert('Your profile has been updated successfully')
-
+        alert('Your profile has been updated successfully');
       })
       .catch(e => {
         console.log('error updating the user')
@@ -132,7 +128,9 @@ class ProfileView extends React.Component {
 
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    window.open('/', '_self');
+    localStorage.removeItem('favorites');
+    this.props.setUser(null);
+    this.props.setFavorites([]);
   }
 
   deRegister() {
@@ -140,14 +138,9 @@ class ProfileView extends React.Component {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     })
       .then(response => {
-        alert('User has been successfully deleted!')
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        window.open('/', '_self');
-        this.setState({
-          user: null
-        });
-        console.log('user deleted')
+        alert('User has been successfully deleted!');
+        this.onLoggedOut();
+        console.log('user deleted');
       })
       .catch(function (error) {
         console.log(error);
