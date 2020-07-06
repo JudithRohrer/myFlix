@@ -44508,13 +44508,13 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       }).then(function (response) {
         var data = response.data;
         var userToStore = {
-          username: data.user.username,
-          email: data.user.email,
-          birthday: data.user.birthday
+          username: data.username,
+          email: data.email,
+          birthday: data.birthday
         };
         localStorage.setItem('user', data.username);
         localStorage.setItem('email', JSON.stringify(data.email));
-        localStorage.setItem('birthday', JSON.stringify(data.user.birthday.substring(0, 10)));
+        localStorage.setItem('birthday', JSON.stringify(data.birthday.substring(0, 10)));
 
         _this2.props.setUser(userToStore);
 

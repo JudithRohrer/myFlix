@@ -101,13 +101,13 @@ class ProfileView extends React.Component {
       .then(response => {
         const data = response.data;
         let userToStore = {
-          username: data.user.username,
-          email: data.user.email,
-          birthday: data.user.birthday
+          username: data.username,
+          email: data.email,
+          birthday: data.birthday
         }
         localStorage.setItem('user', data.username);
         localStorage.setItem('email', JSON.stringify(data.email));
-        localStorage.setItem('birthday', JSON.stringify(data.user.birthday.substring(0, 10)));
+        localStorage.setItem('birthday', JSON.stringify(data.birthday.substring(0, 10)));
         this.props.setUser(userToStore);
 
         console.log(data);

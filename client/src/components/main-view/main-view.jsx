@@ -78,8 +78,6 @@ export class MainView extends React.Component {
 
             <Link to={`/users/${user}`}>
               {localStorage.getItem('user')}
-
-
             </Link>
 
           </Navbar>
