@@ -3,6 +3,7 @@ const express = require('express'),
   uuid = require('uuid'),
   morgan = require('morgan'),
   app = express(),
+  path = require('path'),
   cors = require('cors');
 
 //Server-Side validation
@@ -12,6 +13,10 @@ const { check, validationResult } = require('express-validator');
 app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(express.static('public'));
+app.use("/client", express.static(path.join(__dirname, "client", "dist")));
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 //give certain origins access
 let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', '*'];

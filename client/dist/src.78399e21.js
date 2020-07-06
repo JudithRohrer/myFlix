@@ -44057,7 +44057,7 @@ function RegistrationView(props) {
       }).then(function (response) {
         var data = response.data;
         console.log(data);
-        window.open('/', '_self');
+        window.open('/client', '_self');
       }).catch(function (e) {
         console.log('error registering the user');
       });
@@ -44817,7 +44817,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
       });
-      return _react.default.createElement(_Container.default, null, _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_Navbar.default, {
+      return _react.default.createElement(_Container.default, null, _react.default.createElement(_reactRouterDom.BrowserRouter, {
+        basename: "/client"
+      }, _react.default.createElement(_Navbar.default, {
         sticky: "top",
         bg: "dark",
         variant: "dark"

@@ -71,7 +71,7 @@ export class MainView extends React.Component {
 
     return (
       <Container>
-        <Router>
+        <Router basename="/client">
 
           <Navbar sticky="top" bg="dark" variant="dark">
             <NavbarBrand href="/">MyFlix</NavbarBrand>
