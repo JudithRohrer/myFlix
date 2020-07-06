@@ -101,7 +101,12 @@ class ProfileView extends React.Component {
       .then(response => {
         const data = response.data;
         localStorage.setItem('user', data.username);
-        this.props.setUser(data.username);
+        localStorage.setItem('email', JSON.stringify(data.email));
+        localStorage.setItem('birthday', JSON.stringify(data.user.birthday.substring(0, 10)));
+        this.props.setUser(data.user.username);
+        this.props.setUser(data.user.password);
+        this.props.setUser(data.user.email);
+        this.props.setUser(data.user.birthday);
         console.log(data);
         alert('Your profile has been updated successfully');
       })
@@ -176,15 +181,15 @@ class ProfileView extends React.Component {
         <Card className="Profile-Card">
           <Card.Body>
             <br></br>
-            <h2>{username}</h2>
+            <h2>{localStorage.getItem('user')}</h2>
             <br></br>
             <Card.Text>Password: ######</Card.Text>
-            <Card.Text>Email: {email}</Card.Text>
-            <Card.Text>Birthday: {birthday}</Card.Text>
+            <Card.Text>Email: {localStorage.getItem('email')}</Card.Text>
+            <Card.Text>Birthday: {localStorage.getItem('birthday')}</Card.Text>
             <br></br>
           </Card.Body>
           <Card.Footer>
-            <h5>{username}'s favorite movies: </h5>
+            <h5>{localStorage.getItem('user')}'s favorite movies: </h5>
             <Container>
               <Row>
                 {favorites == 0 && <h2> No favorites yet!</h2>}

@@ -44,6 +44,8 @@ export class MainView extends React.Component {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.props.setUser(localStorage.getItem('user'));
+      this.props.setUser(JSON.parse(localStorage.getItem('email')));
+      this.props.setUser(JSON.parse(localStorage.getItem('birthday')));
       this.props.setFavorites(JSON.parse(localStorage.getItem('favorites')));
       this.getMovies(accessToken);
     }
@@ -75,6 +77,7 @@ export class MainView extends React.Component {
             <NavbarBrand href="/">MyFlix</NavbarBrand>
 
             <Link to={`/users/${user}`}>
+
               <Button
                 className="Profile-button"
                 variant="outline-light"

@@ -43789,10 +43789,17 @@ function LoginView(props) {
       password: password
     }).then(function (response) {
       var data = response.data;
+      var userToStore = {
+        username: data.user.username,
+        email: data.user.email,
+        birthday: data.user.birthday
+      };
       console.log(data);
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', data.user.username);
-      props.setUser(data.user.username);
+      localStorage.setItem('email', JSON.stringify(data.user.email));
+      localStorage.setItem('birthday', JSON.stringify(data.user.birthday.substring(0, 10)));
+      props.setUser(userToStore);
       props.setFavorites(data.user.favorites);
       localStorage.setItem('favorites', JSON.stringify(data.user.favorites));
       props.getMovies(data.token);
@@ -44501,8 +44508,16 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       }).then(function (response) {
         var data = response.data;
         localStorage.setItem('user', data.username);
+        localStorage.setItem('email', JSON.stringify(data.email));
+        localStorage.setItem('birthday', JSON.stringify(data.user.birthday.substring(0, 10)));
 
-        _this2.props.setUser(data.username);
+        _this2.props.setUser(data.user.username);
+
+        _this2.props.setUser(data.user.password);
+
+        _this2.props.setUser(data.user.email);
+
+        _this2.props.setUser(data.user.birthday);
 
         console.log(data);
         alert('Your profile has been updated successfully');
@@ -44583,7 +44598,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         }
       }, "Logout"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_Card.default, {
         className: "Profile-Card"
-      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement("br", null), _react.default.createElement("h2", null, username), _react.default.createElement("br", null), _react.default.createElement(_Card.default.Text, null, "Password: ######"), _react.default.createElement(_Card.default.Text, null, "Email: ", email), _react.default.createElement(_Card.default.Text, null, "Birthday: ", birthday), _react.default.createElement("br", null)), _react.default.createElement(_Card.default.Footer, null, _react.default.createElement("h5", null, username, "'s favorite movies: "), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, favorites == 0 && _react.default.createElement("h2", null, " No favorites yet!"), favorites && detailedFavorites.map(function (movie) {
+      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement("br", null), _react.default.createElement("h2", null, localStorage.getItem('user')), _react.default.createElement("br", null), _react.default.createElement(_Card.default.Text, null, "Password: ######"), _react.default.createElement(_Card.default.Text, null, "Email: ", localStorage.getItem('email')), _react.default.createElement(_Card.default.Text, null, "Birthday: ", localStorage.getItem('birthday')), _react.default.createElement("br", null)), _react.default.createElement(_Card.default.Footer, null, _react.default.createElement("h5", null, localStorage.getItem('user'), "'s favorite movies: "), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, favorites == 0 && _react.default.createElement("h2", null, " No favorites yet!"), favorites && detailedFavorites.map(function (movie) {
         return _react.default.createElement(_Col.default, {
           lg: 2,
           key: movie._id
@@ -44773,6 +44788,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
       if (accessToken !== null) {
         this.props.setUser(localStorage.getItem('user'));
+        this.props.setUser(JSON.parse(localStorage.getItem('email')));
+        this.props.setUser(JSON.parse(localStorage.getItem('birthday')));
         this.props.setFavorites(JSON.parse(localStorage.getItem('favorites')));
         this.getMovies(accessToken);
       }

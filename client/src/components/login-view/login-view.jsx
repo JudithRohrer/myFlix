@@ -25,10 +25,19 @@ function LoginView(props) {
     })
       .then(response => {
         const data = response.data;
+
+        let userToStore = {
+          username: data.user.username,
+          email: data.user.email,
+          birthday: data.user.birthday
+        }
+
         console.log(data);
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', data.user.username);
-        props.setUser(data.user.username);
+        localStorage.setItem('email', JSON.stringify(data.user.email));
+        localStorage.setItem('birthday', JSON.stringify(data.user.birthday.substring(0, 10)));
+        props.setUser(userToStore);
         props.setFavorites(data.user.favorites);
         localStorage.setItem('favorites', JSON.stringify(data.user.favorites));
         props.getMovies(data.token);
