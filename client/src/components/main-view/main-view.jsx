@@ -12,7 +12,7 @@ import { setMovies } from '../../actions/actions';
 import { setUser } from '../../actions/actions';
 import { setFavorites } from '../../actions/actions';
 
-import Button from 'react-bootstrap/Button';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Navbar from 'react-bootstrap/Navbar';
@@ -76,7 +76,7 @@ export class MainView extends React.Component {
           <Navbar sticky="top" bg="dark" variant="dark">
             <NavbarBrand href="/">MyFlix</NavbarBrand>
 
-            <Link to={`/users/${user}`}>
+            <Link to={`/users/${localStorage.getItem('user')}`}>
               {localStorage.getItem('user')}
             </Link>
 
