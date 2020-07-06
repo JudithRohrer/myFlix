@@ -44507,17 +44507,16 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         }
       }).then(function (response) {
         var data = response.data;
+        var userToStore = {
+          username: data.user.username,
+          email: data.user.email,
+          birthday: data.user.birthday
+        };
         localStorage.setItem('user', data.username);
         localStorage.setItem('email', JSON.stringify(data.email));
         localStorage.setItem('birthday', JSON.stringify(data.user.birthday.substring(0, 10)));
 
-        _this2.props.setUser(data.user.username);
-
-        _this2.props.setUser(data.user.password);
-
-        _this2.props.setUser(data.user.email);
-
-        _this2.props.setUser(data.user.birthday);
+        _this2.props.setUser(userToStore);
 
         console.log(data);
         alert('Your profile has been updated successfully');
@@ -44828,10 +44827,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         href: "/"
       }, "MyFlix"), _react.default.createElement(_reactRouterDom.Link, {
         to: "/users/".concat(user)
-      }, _react.default.createElement(_Button.default, {
-        className: "Profile-button",
-        variant: "outline-light"
-      }, localStorage.getItem('user')))), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {
+      }, localStorage.getItem('user'))), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: "/",
         render: function render() {
@@ -44946,8 +44942,6 @@ MainView.propTypes = {
     description: _propTypes.default.string.isRequired,
     imagePath: _propTypes.default.string.isRequired
   })).isRequired
-  /*user: PropTypes.object.isRequired*/
-
 };
 },{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-redux":"../node_modules/react-redux/es/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","../../actions/actions":"actions/actions.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/NavbarBrand":"../node_modules/react-bootstrap/esm/NavbarBrand.js","./main-view.scss":"components/main-view/main-view.scss","../movies-list/movies-list":"components/movies-list/movies-list.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx"}],"reducers/reducers.js":[function(require,module,exports) {
 "use strict";

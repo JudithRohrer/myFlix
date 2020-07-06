@@ -100,13 +100,16 @@ class ProfileView extends React.Component {
     })
       .then(response => {
         const data = response.data;
+        let userToStore = {
+          username: data.user.username,
+          email: data.user.email,
+          birthday: data.user.birthday
+        }
         localStorage.setItem('user', data.username);
         localStorage.setItem('email', JSON.stringify(data.email));
         localStorage.setItem('birthday', JSON.stringify(data.user.birthday.substring(0, 10)));
-        this.props.setUser(data.user.username);
-        this.props.setUser(data.user.password);
-        this.props.setUser(data.user.email);
-        this.props.setUser(data.user.birthday);
+        this.props.setUser(userToStore);
+
         console.log(data);
         alert('Your profile has been updated successfully');
       })

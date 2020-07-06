@@ -77,12 +77,9 @@ export class MainView extends React.Component {
             <NavbarBrand href="/">MyFlix</NavbarBrand>
 
             <Link to={`/users/${user}`}>
+              {localStorage.getItem('user')}
 
-              <Button
-                className="Profile-button"
-                variant="outline-light"
-              >{localStorage.getItem('user')}
-              </Button>
+
             </Link>
 
           </Navbar>
@@ -152,5 +149,4 @@ MainView.propTypes = {
     description: PropTypes.string.isRequired,
     imagePath: PropTypes.string.isRequired
   })).isRequired,
-  /*user: PropTypes.object.isRequired*/
 }
