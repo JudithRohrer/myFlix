@@ -19,7 +19,7 @@ app.get("/client/*", (req, res) => {
 });
 
 //give certain origins access
-let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', '*'];
+let allowedOrigins = ['https://myflix-123-db.herokuapp.com/client/', 'http://localhost:1234', '*'];
 
 app.use(cors({
   origin: (origin, callback) => {
