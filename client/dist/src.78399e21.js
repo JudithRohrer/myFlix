@@ -44830,7 +44830,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         bg: "dark",
         variant: "dark"
       }, _react.default.createElement(_NavbarBrand.default, {
-        href: "/"
+        href: "/client"
       }, "MyFlix"), _react.default.createElement(_reactRouterDom.Link, {
         to: "/users/".concat(localStorage.getItem('user'))
       }, localStorage.getItem('user'))), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {

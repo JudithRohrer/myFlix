@@ -74,7 +74,7 @@ export class MainView extends React.Component {
         <Router basename="/client">
 
           <Navbar sticky="top" bg="dark" variant="dark">
-            <NavbarBrand href="/">MyFlix</NavbarBrand>
+            <NavbarBrand href="/client">MyFlix</NavbarBrand>
 
             <Link to={`/users/${localStorage.getItem('user')}`}>
               {localStorage.getItem('user')}
