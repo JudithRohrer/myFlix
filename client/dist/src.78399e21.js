@@ -44087,7 +44087,7 @@ function RegistrationView(props) {
   })), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "Password:"), _react.default.createElement(_Form.default.Control, {
-    type: "text",
+    type: "password",
     placeholder: "Password",
     value: password,
     onChange: function onChange(e) {
@@ -44627,11 +44627,17 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         onClick: function onClick() {
           return _this5.deRegister();
         }
-      }, "Delete my account"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_Form.default, {
+      }, "Delete my account"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_Button.default, {
+        variant: "light",
+        className: "float-right",
+        onClick: function onClick() {
+          return _this5.handleUpdate();
+        }
+      }, "Update Profile"), _react.default.createElement(_Form.default, {
         className: "registrationForm"
       }, _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicUsername"
-      }, _react.default.createElement("h3", null, "Need to update your user information?"), _react.default.createElement(_Form.default.Label, null, "Username:"), _react.default.createElement(_Form.default.Control, {
+      }, _react.default.createElement("h3", null, "Need to update your user information?"), _react.default.createElement("p", null, "Please fill out all fields"), _react.default.createElement(_Form.default.Label, null, "Username:"), _react.default.createElement(_Form.default.Control, {
         type: "text",
         placeholder: "Username",
         value: this.state.usernameField,
@@ -44641,7 +44647,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       })), _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicPassword"
       }, _react.default.createElement(_Form.default.Label, null, "Password:"), _react.default.createElement(_Form.default.Control, {
-        type: "text",
+        type: "password",
         placeholder: "Password",
         value: this.state.passwordField,
         onChange: function onChange(e) {

@@ -222,10 +222,12 @@ class ProfileView extends React.Component {
         <br></br>
         <br></br>
         <br></br>
+        <Button variant="light" className="float-right" onClick={() => this.handleUpdate()}>Update Profile</Button>
 
         <Form className="registrationForm">
           <Form.Group controlId="formBasicUsername">
             <h3>Need to update your user information?</h3>
+            <p>Please fill out all fields</p>
             <Form.Label>Username:</Form.Label>
             <Form.Control
               type="text"
@@ -238,7 +240,7 @@ class ProfileView extends React.Component {
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password:</Form.Label>
             <Form.Control
-              type="text"
+              type="password"
               placeholder="Password"
               value={this.state.passwordField}
               onChange={e => this.setPasswordField(e.target.value)}
