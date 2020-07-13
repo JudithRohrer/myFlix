@@ -44219,7 +44219,7 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
             src: movie.imagePath
           }))));
         }
-      }))), _react.default.createElement(_reactRouterDom.Link, {
+      }))), _react.default.createElement("br", null), _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
       }, _react.default.createElement(_Button.default, {
         variant: "light"
@@ -44339,7 +44339,7 @@ var GenreView = /*#__PURE__*/function (_React$Component) {
             src: movie.imagePath
           }))));
         }
-      }))), _react.default.createElement(_reactRouterDom.Link, {
+      }))), _react.default.createElement("br", null), _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
       }, _react.default.createElement(_Button.default, {
         variant: "light"

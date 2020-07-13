@@ -52,6 +52,7 @@ export class GenreView extends React.Component {
                 })}
               </Row>
             </Container>
+            <br></br>
             <Link to={`/`}>
               <Button variant="light">Close</Button>
             </Link>
