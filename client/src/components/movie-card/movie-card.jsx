@@ -13,6 +13,12 @@ import './movie-card.scss';
 
 class MovieCard extends React.Component {
 
+  /**
+     * Function adds movie to database
+     * @function addFavMovie
+     * @param {object} authData - from login-view
+     * @returns {Promise<object>} movie object
+     */
 
   addFavMovie(movieId) {
     axios

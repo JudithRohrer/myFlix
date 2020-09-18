@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: main-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: main-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import axios from 'axios';
+
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+
+import { setMovies } from '../../actions/actions';
+import { setUser } from '../../actions/actions';
+import { setFavorites } from '../../actions/actions';
+
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Navbar from 'react-bootstrap/Navbar';
+import NavbarBrand from 'react-bootstrap/NavbarBrand';
+
+
+import './main-view.scss';
+
+import MoviesList from '../movies-list/movies-list';
+import LoginView from '../login-view/login-view';
+import { MovieView } from '../movie-view/movie-view';
+import { RegistrationView } from '../registration-view/registration-view';
+import { DirectorView } from '../director-view/director-view';
+import { GenreView } from '../genre-view/genre-view';
+import ProfileView from '../profile-view/profile-view';
+
+
+export class MainView extends React.Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      user: null
+    };
+  }
+
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.props.setUser(localStorage.getItem('user'));
+      this.props.setUser(JSON.parse(localStorage.getItem('email')));
+      this.props.setUser(JSON.parse(localStorage.getItem('birthday')));
+      this.props.setFavorites(JSON.parse(localStorage.getItem('favorites')));
+      this.getMovies(accessToken);
+    }
+  }
+
+  /**
+   * Function gets movie from database and stores in props
+   * @function getMovies
+   * @async
+   * @param {string} token
+   * @returns {Promise&lt;array>} movies
+   */
+
+  getMovies(token) {
+    axios.get('https://myflix-123-db.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        this.props.setMovies(response.data)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
+  render() {
+    let { movies, user } = this.props;
+
+    if (!movies) return &lt;div className="main-view" />;
+
+    return (
+      &lt;Container>
+        &lt;Router basename="/client">
+
+          &lt;Navbar sticky="top" bg="dark" variant="dark">
+            &lt;NavbarBrand href="/client">MyFlix&lt;/NavbarBrand>
+
+            &lt;Link to={`/users/${localStorage.getItem('user')}`}>
+              {localStorage.getItem('user')}
+            &lt;/Link>
+
+          &lt;/Navbar>
+          &lt;br>&lt;/br>
+          &lt;br>&lt;/br>
+
+          &lt;Row>
+            &lt;Route exact path="/" render={() => {
+              if (!user) return (
+                &lt;LoginView getMovies={(token) => this.getMovies(token)} />);
+              return &lt;MoviesList movies={movies}
+              />;
+            }} />
+
+            &lt;Route path="/register" render={() => {
+              if (user) return &lt;Redirect to="/" />;
+              return &lt;RegistrationView />;
+            }} />
+
+            &lt;Route path="/movies/:movieId" render={({ match }) => {
+              if (!user) return &lt;LoginView getMovies={(token) => this.getMovies(token)} />;
+              return &lt;MovieView movie={movies.find(m => m._id === match.params.movieId)} />;
+            }} />
+
+            &lt;Route path="/genres/:name" render={({ match }) => {
+              if (!user) return &lt;LoginView getMovies={(token) => this.getMovies(token)} />;
+              if (movies.length == 0)
+                return &lt;div className="main-view" />;
+              return &lt;GenreView genre={movies.find(m => m.genre.name === match.params.name).genre} movies={movies} />
+            }} />
+
+            &lt;Route path="/directors/:name" render={({ match }) => {
+              if (!user) return &lt;LoginView getMovies={(token) => this.getMovies(token)} />;
+              if (movies.length == 0)
+                return &lt;div className="main-view" />;
+              return &lt;DirectorView director={movies.find(m => m.director.name === match.params.name).director} movies={movies} />
+            }} />
+
+            &lt;Route path="/users/:username" render={() => {
+              if (!user) return &lt;LoginView getMovies={(token) => this.getMovies(token)} />;
+              return &lt;ProfileView />;
+            }}
+            />
+          &lt;/Row>
+
+
+        &lt;/Router >
+      &lt;/Container >
+    );
+  }
+}
+
+let mapStateToProps = state => {
+  return { movies: state.movies, user: state.user }
+}
+
+
+
+
+export default connect(mapStateToProps, { setMovies, setUser, setFavorites })(MainView);
+
+MainView.propTypes = {
+  setMovies: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    imagePath: PropTypes.string.isRequired
+  })).isRequired,
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#getMovies">getMovies</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Fri Sep 18 2020 21:51:24 GMT+0200 (GMT+02:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

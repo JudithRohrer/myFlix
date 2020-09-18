@@ -12,6 +12,12 @@ const mapStateToProps = state => {
   return { visibilityFilter };
 };
 
+/**
+ * Updates the state to show what a user has entered into the search bar filter in the mainview
+ * @function MoviesList
+ * @params props
+ */
+
 function MoviesList(props) {
   const { movies, visibilityFilter } = props;
   let filteredMovies = movies;

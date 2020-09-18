@@ -1,4 +1,32 @@
-import React from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: profile-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: profile-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
 import axios from 'axios';
 
 import { setUser, setFavorites } from '../../actions/actions';
@@ -194,113 +222,113 @@ class ProfileView extends React.Component {
 
     return (
 
-      <Col>
-        <Link to={`/`}>
-          <Button variant="dark">Back</Button>
-        </Link>
-        <Button
+      &lt;Col>
+        &lt;Link to={`/`}>
+          &lt;Button variant="dark">Back&lt;/Button>
+        &lt;/Link>
+        &lt;Button
           className="Logout-button float-right"
           variant="outline-secondary"
           type="submit"
           onClick={() => this.onLoggedOut()}>Logout
-            </Button>
-        <br></br>
-        <br></br>
-        <Card className="Profile-Card">
-          <Card.Body>
-            <br></br>
-            <h2>{localStorage.getItem('user')}</h2>
-            <br></br>
-            <Card.Text>Password: ######</Card.Text>
-            <Card.Text>Email: {localStorage.getItem('email')}</Card.Text>
-            <Card.Text>Birthday: {localStorage.getItem('birthday')}</Card.Text>
-            <br></br>
-          </Card.Body>
-          <Card.Footer>
-            <h5>{localStorage.getItem('user')}'s favorite movies: </h5>
-            <Container>
-              <Row>
-                {favorites == 0 && <h2> No favorites yet!</h2>}
-                {favorites &&
+            &lt;/Button>
+        &lt;br>&lt;/br>
+        &lt;br>&lt;/br>
+        &lt;Card className="Profile-Card">
+          &lt;Card.Body>
+            &lt;br>&lt;/br>
+            &lt;h2>{localStorage.getItem('user')}&lt;/h2>
+            &lt;br>&lt;/br>
+            &lt;Card.Text>Password: ######&lt;/Card.Text>
+            &lt;Card.Text>Email: {localStorage.getItem('email')}&lt;/Card.Text>
+            &lt;Card.Text>Birthday: {localStorage.getItem('birthday')}&lt;/Card.Text>
+            &lt;br>&lt;/br>
+          &lt;/Card.Body>
+          &lt;Card.Footer>
+            &lt;h5>{localStorage.getItem('user')}'s favorite movies: &lt;/h5>
+            &lt;Container>
+              &lt;Row>
+                {favorites == 0 &amp;&amp; &lt;h2> No favorites yet!&lt;/h2>}
+                {favorites &amp;&amp;
                   detailedFavorites.map(movie => {
                     return (
-                      <Col lg={2} key={movie._id}>
-                        <Card className="profile-view-card" style={{ maxWidth: "10rem", margin: "0 auto" }}>
-                          <Link to={`/movies/${movie._id}`}>
-                            <Card.Img variant="top" src={movie.imagePath} />
-                          </Link>
-                          <Button variant="outline-danger" size="sm" onClick={() => this.deleteFavMovie(movie._id)}>Remove from list</Button>
-                        </Card>
-                      </Col>
+                      &lt;Col lg={2} key={movie._id}>
+                        &lt;Card className="profile-view-card" style={{ maxWidth: "10rem", margin: "0 auto" }}>
+                          &lt;Link to={`/movies/${movie._id}`}>
+                            &lt;Card.Img variant="top" src={movie.imagePath} />
+                          &lt;/Link>
+                          &lt;Button variant="outline-danger" size="sm" onClick={() => this.deleteFavMovie(movie._id)}>Remove from list&lt;/Button>
+                        &lt;/Card>
+                      &lt;/Col>
                     );
                   })}
-              </Row>
-            </Container>
-            <br></br>
+              &lt;/Row>
+            &lt;/Container>
+            &lt;br>&lt;/br>
 
-          </Card.Footer>
-        </Card>
-        <br></br>
-        <Button type="button" className="float-right" variant="danger" size="md" onClick={() => this.deRegister()}>Delete my account</Button>
+          &lt;/Card.Footer>
+        &lt;/Card>
+        &lt;br>&lt;/br>
+        &lt;Button type="button" className="float-right" variant="danger" size="md" onClick={() => this.deRegister()}>Delete my account&lt;/Button>
 
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <Button variant="light" className="float-right" onClick={() => this.handleUpdate()}>Update Profile</Button>
+        &lt;br>&lt;/br>
+        &lt;br>&lt;/br>
+        &lt;br>&lt;/br>
+        &lt;br>&lt;/br>
+        &lt;Button variant="light" className="float-right" onClick={() => this.handleUpdate()}>Update Profile&lt;/Button>
 
-        <Form className="registrationForm">
-          <Form.Group controlId="formBasicUsername">
-            <h3>Need to update your user information?</h3>
-            <p>Please fill out all fields</p>
-            <Form.Label>Username:</Form.Label>
-            <Form.Control
+        &lt;Form className="registrationForm">
+          &lt;Form.Group controlId="formBasicUsername">
+            &lt;h3>Need to update your user information?&lt;/h3>
+            &lt;p>Please fill out all fields&lt;/p>
+            &lt;Form.Label>Username:&lt;/Form.Label>
+            &lt;Form.Control
               type="text"
               placeholder="Username"
               value={this.state.usernameField}
               onChange={e => this.setUsernameField(e.target.value)}
             />
-          </Form.Group>
+          &lt;/Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password:</Form.Label>
-            <Form.Control
+          &lt;Form.Group controlId="formBasicPassword">
+            &lt;Form.Label>Password:&lt;/Form.Label>
+            &lt;Form.Control
               type="password"
               placeholder="Password"
               value={this.state.passwordField}
               onChange={e => this.setPasswordField(e.target.value)}
             />
-          </Form.Group>
+          &lt;/Form.Group>
 
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
+          &lt;Form.Group controlId="formBasicEmail">
+            &lt;Form.Label>Email address&lt;/Form.Label>
+            &lt;Form.Control
               type="email"
               placeholder="Enter email"
               value={this.state.emailField}
               onChange={e => this.setEmailField(e.target.value)}
             />
-            <Form.Text className="text-muted">
+            &lt;Form.Text className="text-muted">
               We will never share your information with anyone
-          </Form.Text>
-          </Form.Group>
+          &lt;/Form.Text>
+          &lt;/Form.Group>
 
-          <Form.Group controlId="formBasicBirthday">
-            <Form.Label>Date of birth</Form.Label>
-            <Form.Control
+          &lt;Form.Group controlId="formBasicBirthday">
+            &lt;Form.Label>Date of birth&lt;/Form.Label>
+            &lt;Form.Control
               type="date"
               placeholder="1985-09-29"
               value={this.state.birthdayField}
               onChange={e => this.setBirthdayField(e.target.value)}
             />
-          </Form.Group>
+          &lt;/Form.Group>
 
-          <Button variant="light" onClick={() => this.handleUpdate()}>Update Profile</Button>
+          &lt;Button variant="light" onClick={() => this.handleUpdate()}>Update Profile&lt;/Button>
 
 
-        </Form>
+        &lt;/Form>
 
-      </Col >
+      &lt;/Col >
     )
   }
 }
@@ -311,3 +339,26 @@ let mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { setUser, setFavorites })(ProfileView);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#deleteFavMovie">deleteFavMovie</a></li><li><a href="global.html#deRegister">deRegister</a></li><li><a href="global.html#handleUpdate">handleUpdate</a></li><li><a href="global.html#onLoggedOut">onLoggedOut</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Fri Sep 18 2020 21:52:27 GMT+0200 (GMT+02:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -51,6 +51,14 @@ export class MainView extends React.Component {
     }
   }
 
+  /**
+   * Function gets movie from database and stores in props
+   * @function getMovies
+   * @async
+   * @param {string} token
+   * @returns {Promise<array>} movies
+   */
+
   getMovies(token) {
     axios.get('https://myflix-123-db.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}` }

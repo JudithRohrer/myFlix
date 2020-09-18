@@ -9,10 +9,25 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-
-
 import './genre-view.scss';
 
+/**
+ * @requires React
+ * @requires react-bootstrap/Button
+ * @requires prop-types
+ * @requires react-router-dom
+ * @requires react-bootstrap/Container
+ * @requires react-bootstrap/Col
+ * @requires react-bootstrap/Card
+ * @requires react-bootstrap/Row
+ */
+
+/**
+ * Genre information of movie
+ * @class GenreView
+ * @param {string} props - movie.genre
+ * @returns {Container} - information about the genre
+ */
 
 export class GenreView extends React.Component {
   constructor() {

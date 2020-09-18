@@ -17,6 +17,14 @@ export function RegistrationView(props) {
   const [email, createEmail] = useState('');
   const [birthday, createBirthday] = useState('');
 
+  /**
+  * Saves new user info in localstorage
+  * @function handleRegistration
+  * @params e
+  * @axios 
+  * @returns {object} Object containing new user info
+  */
+
   const handleRegistration = (e) => {
     e.preventDefault();
 
